@@ -1,0 +1,178 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Service {
+  id          Int            @id @default(autoincrement())
+  name        String         @db.VarChar(250)
+  slug        String         @unique
+  description String         @db.Text
+  image       String?        @db.VarChar(500)
+  homeIcon    String?        @map("home_icon") @db.VarChar(500)
+  order       Int            @default(1)
+  createdAt   DateTime       @default(now()) @map("created_at")
+  updatedAt   DateTime       @updatedAt @map("updated_at")
+  
+  offers      ServiceOffer[]
+  subservices SubService[]
+
+  @@index([order])
+  @@map("services")
+}
+
+model ServiceOffer {
+  id        Int      @id @default(autoincrement())
+  serviceId Int      @map("service_id")
+  offer     String   @db.VarChar(250)
+  order     Int      @default(1)
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  
+  service   Service  @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+
+  @@index([order])
+  @@index([serviceId])
+  @@map("service_offers")
+}
+
+model SubService {
+  id          Int      @id @default(autoincrement())
+  serviceId   Int      @map("service_id")
+  name        String   @db.VarChar(250)
+  slug        String
+  description String   @db.Text
+  image       String?  @db.VarChar(500)
+  order       Int      @default(1)
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+  
+  service     Service  @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+
+  @@index([order])
+  @@index([serviceId])
+  @@map("sub_services")
+}
+
+model Review {
+  id          Int      @id @default(autoincrement())
+  name        String   @db.VarChar(150)
+  designation String?  @db.VarChar(250)
+  image       String?  @db.VarChar(500)
+  review      String   @db.Text
+  order       Int      @default(1)
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  @@index([order])
+  @@map("reviews")
+}
+
+model Page {
+  id           Int      @id @default(autoincrement())
+  title        String   @db.VarChar(50)
+  slug         String   @unique @db.VarChar(50)
+  linkOnFooter Boolean  @default(false) @map("link_on_footer")
+  content      String   @db.Text
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @updatedAt @map("updated_at")
+
+  @@map("pages")
+}
+
+model Pricing {
+  id         Int            @id @default(autoincrement())
+  name       String         @db.VarChar(50)
+  priceRange String         @map("price_range") @db.VarChar(50)
+  order      Int            @default(1)
+  createdAt  DateTime       @default(now()) @map("created_at")
+  updatedAt  DateTime       @updatedAt @map("updated_at")
+  
+  features   PriceFeature[]
+
+  @@index([order])
+  @@map("pricing")
+}
+
+model PriceFeature {
+  id        Int      @id @default(autoincrement())
+  pricingId Int      @map("pricing_id")
+  feature   String   @db.VarChar(250)
+  order     Int      @default(1)
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  
+  pricing   Pricing  @relation(fields: [pricingId], references: [id], onDelete: Cascade)
+
+  @@index([order])
+  @@index([pricingId])
+  @@map("price_features")
+}
+
+model FAQ {
+  id        Int      @id @default(autoincrement())
+  question  String   @db.VarChar(250)
+  answer    String   @db.Text
+  order     Int      @default(1)
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@index([order])
+  @@map("faqs")
+}
+
+enum MemberRole {
+  leader
+  member
+}
+
+model Member {
+  id          Int        @id @default(autoincrement())
+  role        MemberRole @default(member)
+  name        String     @db.VarChar(150)
+  image       String?    @db.VarChar(500)
+  designation String?    @db.VarChar(250)
+  linkedin    String?    @db.VarChar(500)
+  github      String?    @db.VarChar(500)
+  facebook    String?    @db.VarChar(500)
+  order       Int        @default(1)
+  createdAt   DateTime   @default(now()) @map("created_at")
+  updatedAt   DateTime   @updatedAt @map("updated_at")
+
+  @@index([order])
+  @@map("members")
+}
+
+model ProjectSummary {
+  id        Int      @id @default(autoincrement())
+  figure    String   @db.VarChar(10)
+  detail    String   @db.VarChar(250)
+  order     Int      @default(1)
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@index([order])
+  @@map("project_summaries")
+}
+
+model Portfolio {
+  id        Int      @id @default(autoincrement())
+  title     String   @db.VarChar(250)
+  image     String?  @db.VarChar(500)
+  duration  String   @db.VarChar(50)
+  detail    String   @db.Text
+  link      String?  @db.VarChar(500)
+  order     Int      @default(1)
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@index([order])
+  @@map("portfolios")
+}
