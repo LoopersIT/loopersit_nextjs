@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import { signOut } from 'next-auth/react';
+import { signOut, useSession } from 'next-auth/react';
 import {
     LayoutDashboard,
     Settings,
@@ -15,6 +15,7 @@ import {
     Users,
     Folder,
     BarChart3,
+    Shield,
 } from 'lucide-react';
 
 const menuItems = [
@@ -32,14 +33,17 @@ const menuItems = [
 export default function AdminSidebar() {
     const pathname = usePathname();
     const router = useRouter();
+    const { data: session } = useSession();
 
     const handleSignOut = async () => {
         await signOut({ redirect: false });
         router.push('/admin/login');
     };
 
+    const isEnvAdmin = session?.user?.id === 'env-admin';
+
     return (
-        <div className="fixed left-0 top-0 h-full w-64 bg-gradient-to-b from-indigo-900 to-purple-900 text-white shadow-2xl">
+        <div className="fixed left-0 top-0 h-full w-64 bg-gradient-to-b from-indigo-900 to-purple-900 text-white shadow-2xl overflow-y-auto">
             <div className="p-6 border-b border-white/10">
                 <h1 className="text-2xl font-bold">LoopersIT</h1>
                 <p className="text-sm text-indigo-200 mt-1">Admin Panel</p>
@@ -64,6 +68,23 @@ export default function AdminSidebar() {
                         </Link>
                     );
                 })}
+
+                {/* Users link - only for environment admin */}
+                {isEnvAdmin && (
+                    <>
+                        <div className="border-t border-white/10 my-2"></div>
+                        <Link
+                            href="/admin/users"
+                            className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-all ${pathname === '/admin/users'
+                                ? 'bg-white/20 text-white shadow-lg'
+                                : 'text-indigo-100 hover:bg-white/10 hover:text-white'
+                                }`}
+                        >
+                            <Shield size={20} />
+                            <span className="font-medium">Users</span>
+                        </Link>
+                    </>
+                )}
             </nav>
 
             <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-white/10">

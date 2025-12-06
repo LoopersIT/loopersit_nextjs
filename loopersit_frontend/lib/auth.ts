@@ -1,5 +1,7 @@
 import NextAuth from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
+import { prisma } from '@/lib/db';
+import bcrypt from 'bcryptjs';
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
     providers: [
@@ -14,13 +16,37 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
                     return null;
                 }
 
-                // Check against admin credentials from environment
+                const email = credentials.email as string;
+                const password = credentials.password as string;
+
+                // First, try to find user in database
+                try {
+                    const user = await prisma.user.findUnique({
+                        where: { email },
+                    });
+
+                    if (user && user.active) {
+                        // Verify password with bcrypt
+                        const isValid = await bcrypt.compare(password, user.password);
+                        if (isValid) {
+                            return {
+                                id: user.id.toString(),
+                                email: user.email,
+                                name: user.name,
+                            };
+                        }
+                    }
+                } catch (error) {
+                    console.error('Database user lookup error:', error);
+                }
+
+                // Fallback to environment admin
                 const adminEmail = process.env.ADMIN_EMAIL || 'admin@loopersit.com';
                 const adminPassword = process.env.ADMIN_PASSWORD || 'admin123';
 
-                if (credentials.email === adminEmail && credentials.password === adminPassword) {
+                if (email === adminEmail && password === adminPassword) {
                     return {
-                        id: '1',
+                        id: 'env-admin',
                         email: adminEmail,
                         name: 'Admin',
                     };
@@ -51,3 +77,4 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         },
     },
 });
+

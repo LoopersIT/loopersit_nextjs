@@ -176,3 +176,17 @@ model Portfolio {
   @@index([order])
   @@map("portfolios")
 }
+
+model User {
+  id        Int      @id @default(autoincrement())
+  name      String   @db.VarChar(150)
+  email     String   @unique @db.VarChar(255)
+  password  String   @db.VarChar(255)
+  active    Boolean  @default(true)
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@index([email])
+  @@map("users")
+}
+
