@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { Briefcase, MessageSquare, FileText, DollarSign, Plus } from 'lucide-react';
+import { Briefcase, MessageSquare, FileText, DollarSign, Plus, HelpCircle, Users, Folder, BarChart3 } from 'lucide-react';
 
 export default function AdminDashboard() {
     const [stats, setStats] = useState({
@@ -10,17 +10,25 @@ export default function AdminDashboard() {
         reviews: 0,
         pages: 0,
         pricing: 0,
+        faqs: 0,
+        members: 0,
+        portfolio: 0,
+        statistics: 0,
     });
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const fetchStats = async () => {
             try {
-                const [services, reviews, pages, pricing] = await Promise.all([
+                const [services, reviews, pages, pricing, faqs, members, portfolio, statistics] = await Promise.all([
                     fetch('/api/services').then((r) => r.json()),
                     fetch('/api/reviews').then((r) => r.json()),
                     fetch('/api/pages').then((r) => r.json()),
                     fetch('/api/pricing').then((r) => r.json()),
+                    fetch('/api/faqs').then((r) => r.json()),
+                    fetch('/api/members').then((r) => r.json()),
+                    fetch('/api/portfolio').then((r) => r.json()),
+                    fetch('/api/project-summary').then((r) => r.json()),
                 ]);
 
                 setStats({
@@ -28,6 +36,10 @@ export default function AdminDashboard() {
                     reviews: reviews.length || 0,
                     pages: pages.length || 0,
                     pricing: pricing.length || 0,
+                    faqs: faqs.length || 0,
+                    members: members.length || 0,
+                    portfolio: portfolio.length || 0,
+                    statistics: statistics.length || 0,
                 });
             } catch (error) {
                 console.error('Error fetching stats:', error);
@@ -40,34 +52,14 @@ export default function AdminDashboard() {
     }, []);
 
     const cards = [
-        {
-            title: 'Services',
-            count: stats.services,
-            icon: Briefcase,
-            href: '/admin/services',
-            color: 'from-blue-500 to-blue-600',
-        },
-        {
-            title: 'Reviews',
-            count: stats.reviews,
-            icon: MessageSquare,
-            href: '/admin/reviews',
-            color: 'from-green-500 to-green-600',
-        },
-        {
-            title: 'Pages',
-            count: stats.pages,
-            icon: FileText,
-            href: '/admin/pages',
-            color: 'from-purple-500 to-purple-600',
-        },
-        {
-            title: 'Pricing Plans',
-            count: stats.pricing,
-            icon: DollarSign,
-            href: '/admin/pricing',
-            color: 'from-orange-500 to-orange-600',
-        },
+        { title: 'Services', count: stats.services, icon: Briefcase, href: '/admin/services', color: 'from-blue-500 to-blue-600' },
+        { title: 'Reviews', count: stats.reviews, icon: MessageSquare, href: '/admin/reviews', color: 'from-green-500 to-green-600' },
+        { title: 'Pages', count: stats.pages, icon: FileText, href: '/admin/pages', color: 'from-purple-500 to-purple-600' },
+        { title: 'Pricing Plans', count: stats.pricing, icon: DollarSign, href: '/admin/pricing', color: 'from-orange-500 to-orange-600' },
+        { title: 'FAQ', count: stats.faqs, icon: HelpCircle, href: '/admin/faqs', color: 'from-pink-500 to-pink-600' },
+        { title: 'Team Members', count: stats.members, icon: Users, href: '/admin/members', color: 'from-indigo-500 to-indigo-600' },
+        { title: 'Portfolio', count: stats.portfolio, icon: Folder, href: '/admin/portfolio', color: 'from-cyan-500 to-cyan-600' },
+        { title: 'Statistics', count: stats.statistics, icon: BarChart3, href: '/admin/project-summary', color: 'from-teal-500 to-teal-600' },
     ];
 
     if (loading) {
@@ -110,33 +102,37 @@ export default function AdminDashboard() {
             <div className="mt-8 bg-white rounded-xl shadow-md p-6 border border-gray-100">
                 <h2 className="text-xl font-bold text-gray-800 mb-4">Quick Actions</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                    <Link
-                        href="/admin/services"
-                        className="flex items-center gap-3 p-4 rounded-lg bg-blue-50 hover:bg-blue-100 transition-colors"
-                    >
+                    <Link href="/admin/services" className="flex items-center gap-3 p-4 rounded-lg bg-blue-50 hover:bg-blue-100 transition-colors">
                         <Plus size={20} className="text-blue-600" />
                         <span className="font-medium text-blue-900">Add Service</span>
                     </Link>
-                    <Link
-                        href="/admin/reviews"
-                        className="flex items-center gap-3 p-4 rounded-lg bg-green-50 hover:bg-green-100 transition-colors"
-                    >
+                    <Link href="/admin/reviews" className="flex items-center gap-3 p-4 rounded-lg bg-green-50 hover:bg-green-100 transition-colors">
                         <Plus size={20} className="text-green-600" />
                         <span className="font-medium text-green-900">Add Review</span>
                     </Link>
-                    <Link
-                        href="/admin/pages"
-                        className="flex items-center gap-3 p-4 rounded-lg bg-purple-50 hover:bg-purple-100 transition-colors"
-                    >
+                    <Link href="/admin/pages" className="flex items-center gap-3 p-4 rounded-lg bg-purple-50 hover:bg-purple-100 transition-colors">
                         <Plus size={20} className="text-purple-600" />
                         <span className="font-medium text-purple-900">Add Page</span>
                     </Link>
-                    <Link
-                        href="/admin/pricing"
-                        className="flex items-center gap-3 p-4 rounded-lg bg-orange-50 hover:bg-orange-100 transition-colors"
-                    >
+                    <Link href="/admin/pricing" className="flex items-center gap-3 p-4 rounded-lg bg-orange-50 hover:bg-orange-100 transition-colors">
                         <Plus size={20} className="text-orange-600" />
                         <span className="font-medium text-orange-900">Add Pricing</span>
+                    </Link>
+                    <Link href="/admin/faqs" className="flex items-center gap-3 p-4 rounded-lg bg-pink-50 hover:bg-pink-100 transition-colors">
+                        <Plus size={20} className="text-pink-600" />
+                        <span className="font-medium text-pink-900">Add FAQ</span>
+                    </Link>
+                    <Link href="/admin/members" className="flex items-center gap-3 p-4 rounded-lg bg-indigo-50 hover:bg-indigo-100 transition-colors">
+                        <Plus size={20} className="text-indigo-600" />
+                        <span className="font-medium text-indigo-900">Add Member</span>
+                    </Link>
+                    <Link href="/admin/portfolio" className="flex items-center gap-3 p-4 rounded-lg bg-cyan-50 hover:bg-cyan-100 transition-colors">
+                        <Plus size={20} className="text-cyan-600" />
+                        <span className="font-medium text-cyan-900">Add Portfolio</span>
+                    </Link>
+                    <Link href="/admin/project-summary" className="flex items-center gap-3 p-4 rounded-lg bg-teal-50 hover:bg-teal-100 transition-colors">
+                        <Plus size={20} className="text-teal-600" />
+                        <span className="font-medium text-teal-900">Add Statistic</span>
                     </Link>
                 </div>
             </div>
