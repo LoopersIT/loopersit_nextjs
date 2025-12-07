@@ -114,11 +114,19 @@ export default async function HomePage() {
 
                     <div className="services-grid">
                         {services.slice(0, 6).map((service: Service, index: number) => {
-                            const IconComponent = serviceIcons[index % serviceIcons.length];
+                            const FallbackIcon = serviceIcons[index % serviceIcons.length];
                             return (
                                 <Link key={service.id} href={`/services/${service.slug}`} className="service-card">
                                     <div className="service-icon">
-                                        <IconComponent />
+                                        {service.homeIcon ? (
+                                            <img
+                                                src={service.homeIcon}
+                                                alt={service.name}
+                                                style={{ width: '100%', height: '100%', objectFit: 'contain' }}
+                                            />
+                                        ) : (
+                                            <FallbackIcon />
+                                        )}
                                     </div>
                                     <h3>{service.name}</h3>
                                     <p>{service.description.slice(0, 100)}...</p>
@@ -189,9 +197,8 @@ export default async function HomePage() {
                     </div>
 
                     <div className="pricing-grid">
-                        {pricing.map((plan: Pricing, index: number) => (
-                            <div key={plan.id} className={`pricing-card ${index === 1 ? 'featured' : ''}`}>
-                                {index === 1 && <span className="pricing-badge">Most Popular</span>}
+                        {pricing.map((plan: Pricing) => (
+                            <div key={plan.id} className="pricing-card">
                                 <h3>{plan.name}</h3>
                                 <div className="pricing-price">{plan.priceRange}</div>
                                 <ul className="pricing-features">
@@ -204,7 +211,7 @@ export default async function HomePage() {
                                 </ul>
                                 <Link
                                     href="/contact"
-                                    className={`btn ${index === 1 ? 'btn-secondary' : 'btn-outline'}`}
+                                    className="btn btn-outline"
                                     style={{ width: '100%' }}
                                 >
                                     Get Started

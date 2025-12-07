@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { FaCode, FaMobileAlt, FaPalette, FaBullhorn, FaCloud, FaShieldAlt } from 'react-icons/fa';
+import { FaCode } from 'react-icons/fa';
 import { HiOutlineArrowRight, HiOutlineCheck } from 'react-icons/hi';
 import '@/styles/services.css';
 
@@ -18,8 +18,6 @@ interface Service {
 }
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000';
-
-const serviceIcons = [FaCode, FaMobileAlt, FaPalette, FaBullhorn, FaCloud, FaShieldAlt];
 
 async function getServices(): Promise<Service[]> {
     try {
@@ -52,28 +50,31 @@ export default async function ServicesPage() {
             </section>
 
             <div className="page-content">
-                <div className="services-masonry">
-                    {services.map((service, index) => {
-                        const IconComponent = serviceIcons[index % serviceIcons.length];
-                        return (
-                            <div key={service.id} className="service-card-new">
-                                <div className="service-card-header">
-                                    <div className="service-card-icon">
-                                        <IconComponent />
+                <div className="services-list">
+                    {services.map((service) => (
+                        <div key={service.id} className="service-list-card">
+                            {/* Service Image */}
+                            <div className="service-list-image">
+                                {service.image ? (
+                                    <img src={service.image} alt={service.name} />
+                                ) : (
+                                    <div className="service-list-placeholder">
+                                        <FaCode />
                                     </div>
-                                    <div>
-                                        <h2>{service.name}</h2>
-                                        <span className="service-badge">Professional</span>
-                                    </div>
+                                )}
+                            </div>
+
+                            {/* Service Content */}
+                            <div className="service-list-content">
+                                <div className="service-list-header">
+                                    <h2>{service.name}</h2>
                                 </div>
 
-                                <div className="service-card-body">
-                                    <p>{service.description}</p>
-                                </div>
+                                <p className="service-list-description">{service.description}</p>
 
                                 {service.offers?.length > 0 && (
                                     <div className="service-offers-list">
-                                        <h3>What&apos;s included:</h3>
+                                        <h4>What&apos;s included:</h4>
                                         <ul>
                                             {service.offers.slice(0, 4).map((offer) => (
                                                 <li key={offer.id}>
@@ -85,14 +86,12 @@ export default async function ServicesPage() {
                                     </div>
                                 )}
 
-                                <div className="service-card-footer">
-                                    <Link href={`/services/${service.slug}`} className="service-link">
-                                        Learn More <HiOutlineArrowRight />
-                                    </Link>
-                                </div>
+                                <Link href={`/services/${service.slug}`} className="service-link">
+                                    Learn More <HiOutlineArrowRight />
+                                </Link>
                             </div>
-                        );
-                    })}
+                        </div>
+                    ))}
                 </div>
 
                 {services.length === 0 && (

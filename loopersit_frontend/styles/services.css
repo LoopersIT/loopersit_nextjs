@@ -174,3 +174,117 @@
         grid-template-columns: repeat(2, 1fr);
     }
 }
+
+/* Services List with Large Images */
+.services-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.service-list-card {
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    display: grid;
+    grid-template-columns: 1fr;
+    transition: var(--transition);
+}
+
+.service-list-card:hover {
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-4px);
+}
+
+.service-list-image {
+    height: 220px;
+    background: linear-gradient(135deg, var(--primary), var(--primary-light));
+    overflow: hidden;
+}
+
+.service-list-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.service-list-card:hover .service-list-image img {
+    transform: scale(1.05);
+}
+
+.service-list-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 4rem;
+}
+
+.service-list-content {
+    padding: 1.5rem;
+}
+
+.service-list-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+}
+
+.service-list-header h2 {
+    font-size: 1.5rem;
+    color: var(--primary);
+    margin: 0;
+}
+
+.service-list-description {
+    color: var(--text-light);
+    line-height: 1.7;
+    margin-bottom: 1.25rem;
+}
+
+.service-list-content .service-offers-list {
+    padding: 0;
+    margin-bottom: 1.25rem;
+}
+
+.service-list-content .service-offers-list h4 {
+    font-size: 0.9rem;
+    color: var(--secondary);
+    margin-bottom: 0.75rem;
+    font-weight: 600;
+}
+
+@media (min-width: 768px) {
+    .service-list-card {
+        grid-template-columns: 300px 1fr;
+    }
+
+    .service-list-image {
+        height: 100%;
+        min-height: 280px;
+    }
+
+    .service-list-content {
+        padding: 2rem;
+    }
+
+    .service-list-header h2 {
+        font-size: 1.75rem;
+    }
+}
+
+@media (min-width: 1024px) {
+    .service-list-card {
+        grid-template-columns: 380px 1fr;
+    }
+
+    .service-list-image {
+        min-height: 320px;
+    }
+}
