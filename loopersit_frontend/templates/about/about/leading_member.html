@@ -1,0 +1,51 @@
+{% load static %}
+{% load thumbnail %}
+
+<div class="category_name">
+    <span class="first_cat">leading</span>
+    <span class="second_cat">members</span>
+  </div>
+  <div class="top_member_card_list">
+
+    
+    {% for leader in leaders %}
+    {% with linkedin=leader.linkedin github=leader.github facebook=leader.facebook %}
+    <div class="top_member_card">
+      <img
+        class="top_member_img"
+        src="
+        
+        {% if leader.image %}
+          {% thumbnail leader.image 300x0 %}
+        
+        {% else %}
+        {% static 'img/no_img.jpg' %}
+        {% endif %}       
+        "
+        alt="{{leader.name}}"
+      />
+      <span class="top_member_name">{{leader.name}}</span>
+      <span class="top_member_position">{{leader.designation}}</span>
+      <div class="member_link">
+        
+        {% if linkedin %}
+        <a class="member_link_icon" href="{{ linkedin }}" target="_blank"><i class="bi bi-linkedin"></i></a>
+          
+        {% endif %}
+
+        {% if github %}
+        <a class="member_link_icon" href="{{ github }}" target="_blank"><i class="bi bi-github"></i></a>
+          
+        {% endif %}
+
+        {% if facebook %}
+        <a class="member_link_icon" href="{{ facebook }}" target="_blank"><i class="bi bi-facebook"></i></a>
+          
+        {% endif %}
+
+      </div>
+    </div>
+    {% endwith %}
+    {% endfor %}
+
+  </div>

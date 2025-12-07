@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/apply_success.css' %}">
+{% endblock css %}
+
+
+{% block title %}
+    Careers
+{% endblock title %}
+
+
+
+{% block main %}
+     <!------------Career header ----------->
+     <div class="career_header_wrapper">
+        <div class="career_header">
+          <div class="career_header_intro">
+            <div class="career_header_details">
+              
+              {% if active == 'career' %}
+              <span class="career_header_titles"
+              >Be a part of something great</span
+            >
+            {% else %}
+            <span class="career_header_titles"
+                >Your feedback matters to us</span
+              >
+              {% endif %}
+                
+              {% if active == 'career' %}
+              <div class="career_short_title">Thank you for being interested in our journey</div>
+              {% else %}
+              <div class="career_short_title">Thanks for your feedback</div>
+              {% endif %}
+            </div>
+            
+          </div>
+          <div class="category_name">
+            {% if active == 'career' %}
+            <span class="first_cat">Your Application has been submitted</span>
+            <span class="second_cat">successfully</span>
+            {% else %}
+            <span class="first_cat">We have recieved your message</span>
+            <span class="second_cat">successfully</span>
+            {% endif %}
+          </div>
+        </div>
+        <!-- <img class="career_header_img" src="{% static 'img/career_header_3.png' %}" alt="" /> -->
+      </div>
+  
+      <!--------------Open Roles---------->
+      
+      
+    
+
+{% endblock main %}
+    

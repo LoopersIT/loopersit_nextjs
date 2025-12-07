@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load thumbnail %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/service.css' %}">
+{% endblock css %}
+
+
+{% block title %}
+    Services
+{% endblock title %}
+
+
+
+{% block main %}
+<div class="service-container">
+    <!-----------Category devider ---------------------------->
+  <div class="category_name">
+    <span class="first_cat">Our</span>
+    <span class="second_cat">Services</span>
+  </div>
+  <!-- -----------------end of category devider ------------------------ -->
+   
+    <div class="service-categories"> 
+
+        
+        {% for service in services %}        
+        {% with service.offers.all as offers %}
+        
+        <div class="service">
+            <div class="service-intro">
+                <img class="service-image" src="
+                
+                {% if service.image %}
+                    {% thumbnail service.image 600x300 %}
+                {% else %}
+                {% static 'img/no_img.jpg' %}
+                {% endif %}
+                
+                " alt="{{service.name}}">
+                <h1 class="service-title">{{service.name}}</h1>
+                <p class="service-short-description">
+                    {{service.description}}
+                </p>
+            </div>
+            <div class="service-offer">
+                <h2 class="offer-title">What we offer</h2>
+                <ul class="offer-list">
+                    
+                    {% for offer in offers %}
+                    <li class="offer-list-item">
+                        <span class="offer-bullet"></span> {{offer.offer}}
+                    </li>
+                    {% endfor %}
+
+                </ul>
+                <div class="btn-container">
+                    <a href="{{service.get_absolute_url}}" class="service-explore-btn">Explore Options</a>
+                </div>
+            </div>
+        </div>
+
+        {% endwith %}
+        {% endfor %}
+        
+        
+    </div>
+</div>
+{% endblock main %}
+    

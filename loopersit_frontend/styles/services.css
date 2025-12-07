@@ -1,0 +1,131 @@
+/* Services Page Styles */
+@import './base.css';
+
+.service-container {
+    padding: 1rem;
+}
+
+.service-categories {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin-top: 1rem;
+}
+
+.service {
+    background: #fff;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+.service-intro {
+    padding: 1.5rem;
+}
+
+.service-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+}
+
+.service-title {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    margin-bottom: 0.75rem;
+}
+
+.service-short-description {
+    color: var(--text-light);
+    line-height: 1.6;
+    font-size: 0.95rem;
+}
+
+.service-offer {
+    background: linear-gradient(135deg, var(--primary-color), #3d2f6b);
+    color: #fff;
+    padding: 1.5rem;
+}
+
+.offer-title {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    color: var(--secondary-color);
+}
+
+.offer-list {
+    list-style: none;
+}
+
+.offer-list-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+    font-size: 0.95rem;
+}
+
+.offer-bullet {
+    width: 8px;
+    height: 8px;
+    background: var(--secondary-color);
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.btn-container {
+    margin-top: 1.5rem;
+}
+
+.service-explore-btn {
+    display: inline-block;
+    background: var(--secondary-color);
+    color: #fff;
+    padding: 0.75rem 1.5rem;
+    border-radius: 10px;
+    text-decoration: none;
+    transition: background 0.3s ease;
+}
+
+.service-explore-btn:hover {
+    background: #1d9494;
+}
+
+@media screen and (min-width: 769px) {
+    .service-container {
+        padding: 1rem 2rem;
+    }
+
+    .service-categories {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .service {
+        width: calc(50% - 1rem);
+    }
+
+    .service-image {
+        height: 250px;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .service {
+        display: flex;
+    }
+
+    .service-intro {
+        width: 60%;
+    }
+
+    .service-offer {
+        width: 40%;
+    }
+
+    .service-image {
+        height: 180px;
+    }
+}

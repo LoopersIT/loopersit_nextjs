@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/homepage.css' %}">
+{% endblock css %}
+    
+
+{% block title %}
+    Home
+{% endblock title %}
+
+
+{% block main %}
+<div class="background_wave">
+    {% include 'loopers/home/intro_header.html' %}
+</div>
+<div class="gap"></div>
+    <!-----------Our services ---------------------------->
+    {% include 'loopers/home/service.html' %}
+
+    <!-----------------portfolio ---------------------------->
+    {% include 'loopers/home/portfolio.html' %}
+
+    <!-----------------Reviews ---------------------------->
+    {% include 'loopers/home/review.html' %}
+
+    <!-----------------blogs ---------------------------->
+    <!-- {% include 'loopers/home/blog.html' %} -->
+
+    <!-----------------Estimated price ---------------------------->
+    {% include 'loopers/home/pricing.html' %}
+
+
+  
+{% endblock main %}
+    

@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/portfolio.css' %}">
+{% endblock css %}
+
+
+
+{% block title %}
+    Portfolio
+{% endblock title %}
+
+
+{% block main %}
+    <!--portfolio header-->
+    <div class="portfolio_header">
+        <div class="portfolio_round_div">
+          <img
+            class="portfolio_round_svg"
+            src="{% static 'img/portfolio_round_1.svg' %}"
+            alt=""
+          />
+          <img
+            class="portfolio_round_svg"
+            src="{% static 'img/portfolio_round_2.svg' %}"
+            alt=""
+          />
+        </div>
+        <div class="portfolio_header_details">
+          <h1 class="portfolio_header_title">Our Projects</h1>
+          <p class="portfolio_header_desc">
+            Exceptional Teamwork, Outstanding Results: Our team’s dedication and
+            expertise have driven remarkable achievements this year. We’re excited
+            to build on this success and reach new heights together
+          </p>
+        </div>
+      </div>
+  
+      <!--project summary-->
+      <div class="category_name">
+        <span class="first_cat">Project</span>
+        <span class="second_cat">Summary</span>
+      </div>
+  
+      <div class="project_summary_card_list">
+        
+        {% for summary in summaries %}
+        <div class="project_summary_card">
+          <span class="portfolio_project_number">{{summary.figure}}</span>
+          <span class="portfolio_project_name">{{summary.detail}}</span>
+        </div>
+        {% empty %}
+        No poject summary added yet
+        {% endfor %}
+        
+      </div>
+  
+      <!--project details-->
+      <div class="category_name">
+        <span class="first_cat">Project</span>
+        <span class="second_cat">Details</span>
+      </div>
+      
+      {% for portfolio in portfolios %}
+
+      <div class="portfolio_project_card">
+        <div class="portfolio_project_img_wrapper">
+          <img
+            class="portfolio_project_img"
+            src="
+            
+            {% if portfolio.image %}
+              {{portfolio.image.url}}
+            {% else %}
+              {% static 'img/no_img.jpg' %}
+            {% endif %}
+              
+            "
+            alt=""
+          />
+        </div>
+        <div class="portfolio_project_details_right">
+          <h1 class="portfolio_project_title">{{portfolio.title}}</h1>
+          <p class="portfolio_project_desc">
+            {{portfolio.detail}}
+          </p>
+          <span class="portfolio_time_duration"
+            >Project duration time: {{portfolio.duration}}</span
+          >
+          <div class="portfolio_project_button">
+            <a class="portfolio_project_link" href="{{portfolio.link}}" target="_blank">Visit the project</a>
+          </div>
+        </div>
+      </div>
+      {% empty %}
+        No project added yet
+      {% endfor %}
+
+{% endblock main %}
+    

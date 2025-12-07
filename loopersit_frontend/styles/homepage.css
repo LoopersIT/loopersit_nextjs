@@ -1,0 +1,510 @@
+/* Homepage Styles */
+@import './base.css';
+
+.background_wave {
+    width: 100%;
+    min-height: 13.5rem;
+    background-image: url(/img/Vector.svg);
+    background-repeat: no-repeat;
+    background-position: right;
+    margin: 0;
+}
+
+/* Intro/Hero Section */
+.intro_card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 0.063rem;
+    margin: 0 0.5rem;
+    padding: 1rem;
+    padding-bottom: 1.5rem;
+    border-radius: 1.563rem;
+    border: 0.063rem solid #fff;
+    background: linear-gradient(108deg, rgba(255, 255, 255, 0.25) -8.57%, rgba(255, 255, 255, 0.15) 111.32%);
+    box-shadow: 0px 20px 40px 0px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+}
+
+.intro_img {
+    width: 15rem;
+    object-fit: cover;
+}
+
+.intro_tag {
+    font-size: 1.5rem;
+    text-align: center;
+    margin: 0.5rem 0 0 0;
+    font-weight: 600;
+}
+
+.intro_details {
+    margin: 0.5rem;
+    text-align: center;
+    font-size: 1rem;
+    color: var(--text-dark);
+}
+
+.intro_buttons {
+    text-align: center;
+    padding-bottom: 0.625rem;
+    margin-top: 1.5rem;
+    display: flex;
+    gap: 0.625rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.gap {
+    margin-top: 2rem;
+}
+
+/* Services Section */
+.service_box {
+    display: flex;
+    flex-direction: column;
+    row-gap: 1.5rem;
+    margin: 0 0.5rem 1rem 0.5rem;
+}
+
+.services {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    background-color: #fff;
+    padding: 1rem;
+    border-radius: 15px;
+    border-left: 1.25rem solid var(--secondary-color);
+    text-decoration: none;
+    color: var(--text-dark);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.services:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.service_svg {
+    background-color: #a7dede;
+    border-radius: 50%;
+    padding: 0.875rem 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 60px;
+    min-height: 60px;
+}
+
+.service_img {
+    width: 2.5rem;
+    height: 2.5rem;
+    object-fit: cover;
+}
+
+.service_name {
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+.all_services {
+    border-radius: 15px;
+    background: linear-gradient(90deg, rgba(42, 29, 81, 0.72) 7%, rgba(35, 173, 173, 0.9) 61.11%);
+    padding: 2.5rem;
+    margin: 0 0.5rem 1rem 0.5rem;
+    color: #fff;
+    text-align: center;
+}
+
+.all_service_link {
+    text-decoration: none;
+    color: #fff;
+}
+
+.all_service_name {
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+/* Stats/Portfolio Section */
+.about_us {
+    background-color: #fff;
+    padding-bottom: 1.5rem;
+    border-radius: 15px;
+    margin: 0.625rem;
+}
+
+.about_stats {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 0.8rem;
+    padding: 1rem;
+    min-height: 12rem;
+    border-radius: 15px;
+    border-top: 2rem solid var(--secondary-color);
+    flex-wrap: wrap;
+}
+
+.stats {
+    background-color: var(--secondary-color);
+    border-radius: 50%;
+    text-align: center;
+    padding: 1rem 0.8rem;
+    width: 5.7rem;
+    height: 5.7rem;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.hanging_line {
+    border-left: 4px dotted var(--secondary-color);
+    height: 4rem;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 100%;
+}
+
+.stats_number {
+    display: block;
+    font-size: 1rem;
+    color: #fff;
+    font-weight: 700;
+}
+
+.stats_details {
+    font-size: 10px;
+    color: #fff;
+    line-height: 1.2;
+}
+
+.about_button {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+/* Reviews Section */
+.review_wrapper {
+    background-color: #fff;
+    padding: 2rem;
+    margin: 0 0.625rem;
+    border-radius: 15px;
+}
+
+.review_profile {
+    display: flex;
+    align-items: center;
+    border: 2px solid var(--secondary-color);
+    position: relative;
+    margin: 2.5rem 0.3rem;
+    border-radius: 100px;
+    min-height: 4rem;
+    text-decoration: none;
+    color: var(--text-dark);
+    padding: 0.5rem;
+    padding-left: 5rem;
+}
+
+.reviewer_image {
+    width: 5rem;
+    height: 5rem;
+    border: 3px solid var(--secondary-color);
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: -0.3rem;
+    object-fit: cover;
+    background-color: var(--secondary-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.reviewer_details {
+    background-color: var(--primary-color);
+    text-align: center;
+    display: inline-block;
+    padding: 0.19rem 0.8rem;
+    border-radius: 0.938rem;
+    color: #fff;
+    position: absolute;
+    left: 4rem;
+    top: -1rem;
+}
+
+.reviewer_name {
+    font-size: 0.7rem;
+    margin: 0;
+    font-weight: 600;
+}
+
+.reviewer_designation {
+    font-size: 0.5rem;
+    margin: 0.2rem;
+    opacity: 0.9;
+}
+
+.review_text {
+    font-size: 0.8rem;
+    line-height: 1.4;
+}
+
+.review_button {
+    margin-top: 2rem;
+    text-align: center;
+}
+
+/* Pricing Section */
+.estimated_price {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    padding: 0 0.625rem;
+}
+
+.price_card {
+    background-color: var(--primary-color);
+    color: #fff;
+    padding: 2rem;
+    border-radius: 15px;
+    width: 100%;
+    max-width: 320px;
+}
+
+.service_desc {
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.product_name {
+    font-size: 1.5rem;
+    font-weight: 600;
+    display: block;
+}
+
+.service_price {
+    display: block;
+    font-size: 1.1rem;
+    margin-top: 0.5rem;
+    color: var(--secondary-color);
+}
+
+.offer_list {
+    margin-top: 1.5rem;
+}
+
+.offer_details {
+    margin: 0.8rem 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.check_icons {
+    color: var(--secondary-color);
+    font-size: 1.2rem;
+}
+
+.offer_desc {
+    font-size: 0.9rem;
+}
+
+.price_button {
+    margin: 2rem 0 1rem 0;
+    text-align: center;
+}
+
+/* Responsive Styles */
+@media screen and (min-width: 769px) {
+    .background_wave {
+        min-height: 30rem;
+    }
+
+    .intro_card {
+        flex-direction: row-reverse;
+        align-items: unset;
+        justify-content: space-between;
+        margin: 0 1.5rem;
+        padding: 2rem;
+    }
+
+    .intro_paragraph {
+        margin: 2rem 0 0 2rem;
+        max-width: 50%;
+    }
+
+    .intro_tag {
+        font-size: 2.3rem;
+        text-align: left;
+    }
+
+    .intro_details {
+        margin: 0.625rem 0 2rem 0;
+        text-align: left;
+        font-size: 1.2rem;
+    }
+
+    .intro_buttons {
+        justify-content: flex-start;
+    }
+
+    .intro_img {
+        width: 24rem;
+        height: 24rem;
+        margin: 0.7rem 0.5rem 0 0;
+    }
+
+    .gap {
+        margin-top: -1rem;
+    }
+
+    .service_box {
+        flex-direction: row;
+        justify-content: space-around;
+        column-gap: 1rem;
+        flex-wrap: wrap;
+    }
+
+    .services {
+        width: 48%;
+    }
+
+    .about_stats {
+        min-height: 17rem;
+        gap: 5rem;
+    }
+
+    .stats {
+        padding: 2rem 0;
+        width: 8rem;
+        height: 8rem;
+    }
+
+    .stats_number {
+        font-size: 2rem;
+    }
+
+    .stats_details {
+        font-size: 0.8rem;
+    }
+
+    .hanging_line {
+        height: 5rem;
+    }
+
+    .review_profile {
+        width: 70%;
+        padding-left: 9rem;
+    }
+
+    .review_profile:nth-child(2n) {
+        margin-left: auto;
+    }
+
+    .reviewer_image {
+        width: 8rem;
+        height: 8rem;
+        font-size: 2rem;
+    }
+
+    .reviewer_details {
+        left: 8rem;
+    }
+
+    .reviewer_name {
+        font-size: 0.9rem;
+    }
+
+    .reviewer_designation {
+        font-size: 0.7rem;
+    }
+
+    .review_text {
+        font-size: 1rem;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .background_wave {
+        min-height: 38rem;
+    }
+
+    .intro_card {
+        margin: 0 1.875rem;
+    }
+
+    .intro_tag {
+        font-size: 3.2rem;
+    }
+
+    .intro_details {
+        font-size: 1.4rem;
+    }
+
+    .gap {
+        margin-top: -9rem;
+    }
+
+    .service_box {
+        margin: 0 1.875rem 1rem 1.875rem;
+    }
+
+    .services {
+        padding: 1.5rem;
+    }
+
+    .service_name {
+        font-size: 1.5rem;
+    }
+
+    .all_services {
+        padding: 3rem;
+        margin: 0 2rem;
+    }
+
+    .all_service_name {
+        font-size: 1.5rem;
+    }
+
+    .about_us {
+        margin: 0 1.875rem;
+    }
+
+    .about_stats {
+        gap: 10rem;
+    }
+
+    .stats {
+        width: 9rem;
+        height: 9rem;
+    }
+
+    .stats_number {
+        font-size: 2.5rem;
+    }
+
+    .stats_details {
+        font-size: 1rem;
+    }
+
+    .review_wrapper {
+        margin: 0 1.875rem;
+    }
+
+    .review_profile {
+        width: 50%;
+        min-height: 5rem;
+    }
+
+    .price_card {
+        width: 320px;
+    }
+}

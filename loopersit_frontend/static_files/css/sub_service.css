@@ -1,0 +1,77 @@
+@import 'base.css';
+
+.sub-service {
+    background-color: white;
+    border-radius: 1rem;
+    width: 90%;
+    margin: 1.5rem auto;
+}
+
+.sub-service-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+}
+
+.sub-service-info {
+    padding: .5rem;
+}
+.sub-service-title{
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+.sub-service-descr {
+    font-size: 1rem;
+
+}
+
+.sub-btn-container {
+    text-align: center;
+    margin: 1.5rem;
+}
+
+.sub-contact-btn {
+    text-decoration: none;
+    padding: .6rem;
+    color: white;
+    background-color: var(--secondary_col);
+    border-radius: 10px;
+}
+
+
+.sub-contact-btn:hover {
+    color: black;
+    background-color: white;
+    border: 1px solid var(--secondary_col);
+    border-radius: 10px;
+}
+
+@media screen and (min-width: 769px){
+    .sub-service-container {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .sub-service{
+        display: flex;
+        gap: 5px;
+    }
+    .sub-service-img {
+        width: 40%;
+        border-top-right-radius: 0px;
+        border-bottom-left-radius: 1rem;
+
+    }
+
+    .sub-service-title{
+        font-size: 1.4rem;
+        font-weight: 700;
+    }
+
+    .sub-btn-container {
+        text-align: right;
+    }
+}

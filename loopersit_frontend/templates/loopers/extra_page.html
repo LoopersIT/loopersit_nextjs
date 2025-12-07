@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/extra_page.css' %}">
+{% endblock css %}
+
+
+
+{% block title %}
+    {{page.title}}
+{% endblock title %}
+
+
+
+{% block main %}
+    <div class="extra-page-cotainer">
+        {{page.content|safe}}
+    </div>
+{% endblock main %}
+    
+    

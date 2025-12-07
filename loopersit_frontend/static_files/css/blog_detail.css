@@ -1,0 +1,141 @@
+@import 'base.css';
+
+
+.blog-details {
+    background-color: white;
+    width: 100%;
+    padding: 1rem;
+    border-bottom-left-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+    margin-bottom: 1rem;
+}
+
+.blog-img {
+    width: 100%;
+    border-radius: 1rem;
+}
+
+.blog-title {
+    font-size: 1.3rem;
+}
+
+.blog-info {
+    display: flex;
+    justify-content: flex-end;
+    gap: .8rem;
+    color: rgb(100, 94, 94);
+    margin-bottom: 1.5rem;
+}
+
+.blog-sidebar {
+    background-color: white;
+    border-bottom-left-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+    padding: .5rem;
+}
+
+.related-article {
+    border: 1px solid var(--secondary_col);
+    border-radius: 1rem;
+    margin-bottom: 1rem;
+    padding: .5rem;
+}
+
+.related-artilce-link {
+    text-decoration: none;
+    color: black;
+}
+
+.related-artilce-link:hover {
+    text-decoration: underline;
+}
+
+.related-article-title {
+    font-size: 1rem;
+}
+
+.related-article-publish {
+    color: rgb(96, 88, 88);
+}
+
+.side-categories-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+}
+
+.side-category {
+    list-style-type: none;
+    margin-top: 1.5rem;
+}
+
+.side-category-link {
+    text-decoration: none;
+    border: 1px solid var(--secondary_col);
+    padding: .6rem;
+    border-radius: .6rem;
+    color: black;
+}
+
+.all-btn {
+    background-color: var(--secondary_col);
+    border: 0px;
+    color: white;
+}
+
+.side-category-link:hover {
+    background-color: var(--secondary_col);
+    border: 0px;
+    color: white;
+}
+
+.tag-lists{
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem;
+    margin: 0;
+    padding: 0;
+}
+
+.tag-lists .tags {
+    list-style-type: none;
+}
+
+.tag-link {
+    text-decoration: none;
+    color: var(--secondary_col);
+}
+
+.tag-link:hover {
+    text-decoration: underline;
+}
+
+@media screen and (min-width: 769px){
+    .blog-container {
+        display: grid;
+        grid-template-columns: 3fr 1fr;
+        gap: 2rem;
+    }
+    .blog-details{
+        padding: 2rem;
+    }
+    .blog-sidebar{
+        padding: 1rem;
+    }
+    .blog-title{
+        font-size: 1.6rem;
+    }
+    .blog-detail-body {
+        font-size: 1.1rem;
+        color: rgb(39, 35, 35);
+    }
+
+    .blog-img {
+        height: 500px;
+        object-fit: cover;
+    }
+}

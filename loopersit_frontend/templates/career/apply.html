@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/apply_success.css' %}">
+{% endblock css %}
+
+
+{% block title %}
+    Careers
+{% endblock title %}
+
+
+
+{% block main %}
+     <!------------Career header ----------->
+     <div class="career_header_wrapper">
+        <div class="career_header">
+          <div class="career_header_intro">
+            <div class="career_header_details">
+              <span class="career_header_titles"
+                >Be a part of something great</span
+              >
+              <!-- <span class="career_header_action_titles"
+              >Your next big career move</span
+            > -->
+  
+              <div class="career_short_title">Your next big career move</div>
+            </div>
+            <img
+              class="career_header_subtract"
+              src="{% static 'img/career_header_subtract.svg' %}"
+              alt=""
+            />
+          </div>
+        </div>
+        <img class="career_header_img" src="{% static 'img/career_header_3.png' %}" alt="" />
+      </div>
+  
+      <!--------------Open Roles---------->
+      <div class="category_name">
+        <span class="first_cat">Apply for the</span>
+        <span class="second_cat">Role</span>
+      </div>
+
+      <div class="">
+        <form method="post" enctype="multipart/form-data" class="apply-form">
+          {{form}}
+          <div class="apply-form-btn-container">
+            <button type="submit" class="apply-submit-btn">Submit</button>
+          </div>
+          {% csrf_token %}
+        </form>
+      </div>
+
+      
+    
+
+{% endblock main %}
+    

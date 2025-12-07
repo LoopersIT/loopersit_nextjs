@@ -1,0 +1,20 @@
+{% load static %}
+
+<div class="margin_hack"></div>
+    <!-----------intro header ---------------------------->
+    <div class="intro_card">
+      <div class="intro_svg">
+        <img class="intro_img" src="{% static 'img/homepage_intro_img.png' %}" alt="" />
+      </div>
+      <div class="intro_paragraph">
+        <p class="intro_tag">Building websites, growing business online</p>
+        <p class="intro_details">
+          We create responsive, custom websites and implement digital
+          marketing strategies to drive business growth online
+        </p>
+        <div class="intro_buttons">
+          <a href="{% url 'service_page' %}" class="get_started">Get started</a>
+          <a href="{% url 'schedule_call' %}" class="call_button">Schedule a call</a>
+        </div>
+      </div>
+    </div>

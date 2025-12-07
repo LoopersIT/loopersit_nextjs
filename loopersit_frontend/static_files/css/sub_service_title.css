@@ -1,0 +1,31 @@
+@import "base.css";
+.service_header_headline {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 2rem;
+}
+.service_header_title {
+  margin: 0;
+  font-size: 1.4rem;
+}
+.service_header_line {
+  width: 12rem;
+  margin-top: -0.3rem;
+}
+@media screen and (min-width: 768px) {
+  .service_header_title {
+    font-size: 1.2rem;
+  }
+  .service_header_line {
+    width: 10rem;
+  }
+}
+@media screen and (min-width: 1020px) {
+  .service_header_title {
+    font-size: 2.2rem;
+  }
+  .service_header_line {
+    width: 19rem;
+  }
+}

@@ -1,0 +1,131 @@
+/* Navbar Styles */
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--primary-color);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.logoLink {
+    display: flex;
+    column-gap: 5px;
+    align-items: center;
+    text-decoration: none;
+    padding: 8px 0 8px 15px;
+}
+
+.logoLetter {
+    margin-bottom: 3px;
+}
+
+.logoLetter_first {
+    color: #fff;
+    font-size: 20px;
+}
+
+.logoLetter_second {
+    color: var(--secondary-color);
+    margin-left: -4px;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.navItems {
+    padding-right: 20px;
+    z-index: 2;
+}
+
+.navItemsMenu_link {
+    text-decoration: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.2rem;
+}
+
+.navItemsMenu_link:hover {
+    background-color: rgba(35, 173, 173, 0.3);
+    border-radius: 5px;
+}
+
+.navItemsMenu_link i {
+    color: #fff;
+    font-size: 25px;
+}
+
+.nav_lists {
+    list-style-type: none;
+    position: relative;
+}
+
+.menu_list {
+    background: var(--primary-color);
+    padding: 20px;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    position: absolute;
+    top: 33px;
+    right: 0;
+}
+
+.nav_items_link {
+    display: block;
+    text-decoration: none;
+    color: #fff;
+    padding: 10px;
+    transition: all 0.3s ease;
+}
+
+.nav_items_link:hover {
+    text-decoration: underline;
+}
+
+.nav_items_link.active {
+    border-bottom: 2px solid #fff;
+}
+
+.hide_nav {
+    display: none;
+}
+
+@media screen and (min-width: 1020px) {
+    .logoLetter_first {
+        font-size: 25px;
+    }
+
+    .logoLetter_second {
+        font-size: 25px;
+        font-weight: 600;
+    }
+
+    .menu_list {
+        position: initial;
+        background: none;
+        margin-top: 0;
+        display: flex;
+        align-items: center;
+    }
+
+    .nav_items_link {
+        display: initial;
+        margin-left: 20px;
+    }
+
+    .nav_items_link:hover {
+        background-color: rgba(35, 173, 173, 0.3);
+        border-radius: 15px;
+        text-decoration: none;
+        padding: 10px 15px;
+    }
+
+    .navItemsMenu_link {
+        display: none;
+    }
+
+    .hide_nav {
+        display: flex;
+    }
+}

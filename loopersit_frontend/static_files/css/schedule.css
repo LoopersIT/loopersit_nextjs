@@ -1,0 +1,23 @@
+@import "base.css";
+
+.schedule_header {
+  /* text-align: center; */
+  background: linear-gradient(
+    90deg,
+    rgba(35, 173, 173, 0.7) 0.07%,
+    rgba(42, 29, 81, 0.9) 99.93%
+  );
+  padding: 5rem;
+}
+.schedule_headline {
+  font-size: 1.5rem;
+  color: #fff;
+  text-align: center;
+  margin: 0;
+}
+
+@media screen and (min-width: 769px) {
+  .schedule_headline {
+    font-size: 3rem;
+  }
+}

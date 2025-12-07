@@ -1,0 +1,26 @@
+<div class="category_name">
+    <span class="first_cat">Our</span>
+    <span class="second_cat">Portfolio</span>
+  </div>
+
+  <div class="about_us">
+
+    <div class="about_stats">
+
+        
+    {% for summary in summaries %}
+      <div class="stats">
+        <div class="hanging_line"></div>
+        <span class="stats_number">{{summary.figure}}</span>
+        <span class="stats_details">{{summary.detail}}</span>
+      </div>
+    {% empty %}
+      No portfolio added yet
+    {% endfor %}
+
+
+    </div>
+    <div class="about_button">
+      <a href="{% url 'portfolio' %}" class="call_button">See more</a>
+    </div>
+  </div>
