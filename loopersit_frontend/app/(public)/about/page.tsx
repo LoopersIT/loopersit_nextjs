@@ -1,3 +1,4 @@
+import { FaLinkedinIn, FaGithub, FaFacebookF, FaBolt, FaShieldAlt, FaHeadset, FaChartLine } from 'react-icons/fa';
 import '@/styles/services.css';
 import '@/styles/about.css';
 
@@ -31,6 +32,8 @@ export const metadata = {
 
 export default async function AboutPage() {
     const team = await getTeam();
+    const leaders = team.filter(m => m.role === 'leader');
+    const members = team.filter(m => m.role === 'member');
 
     return (
         <>
@@ -45,102 +48,151 @@ export default async function AboutPage() {
             </section>
 
             <div className="page-content">
-                {/* About Section */}
-                <div className="about-grid">
-                    <div className="about-text">
-                        <h2>Who We Are</h2>
-                        <p>
-                            LoopersIT is a leading software development company dedicated to helping
-                            businesses succeed in the digital world. Founded with a passion for
-                            technology and innovation, we have grown into a team of skilled
-                            developers, designers, and strategists.
-                        </p>
-                        <p>
-                            Our mission is to empower businesses with cutting-edge technology,
-                            beautiful design, and strategic digital marketing to achieve their
-                            goals and grow online.
-                        </p>
+                {/* Intro */}
+                <div className="about-intro">
+                    <h2>Who We Are</h2>
+                    <p>
+                        LoopersIT is a leading software development company dedicated to helping
+                        businesses succeed in the digital world. Founded with a passion for
+                        technology and innovation, we have grown into a team of skilled
+                        developers, designers, and strategists who work together to deliver
+                        exceptional digital solutions.
+                    </p>
+                </div>
 
-                        <div className="about-features">
-                            <div className="about-feature">
-                                <i className="bi bi-lightning-charge"></i>
-                                <div>
-                                    <h4>Fast Delivery</h4>
-                                    <p>Quick turnaround without compromising quality</p>
-                                </div>
-                            </div>
-                            <div className="about-feature">
-                                <i className="bi bi-shield-check"></i>
-                                <div>
-                                    <h4>Quality Focused</h4>
-                                    <p>We deliver only the highest quality work</p>
-                                </div>
-                            </div>
-                            <div className="about-feature">
-                                <i className="bi bi-headset"></i>
-                                <div>
-                                    <h4>24/7 Support</h4>
-                                    <p>Always here when you need us</p>
-                                </div>
-                            </div>
-                            <div className="about-feature">
-                                <i className="bi bi-graph-up-arrow"></i>
-                                <div>
-                                    <h4>Results Driven</h4>
-                                    <p>Focused on achieving your business goals</p>
-                                </div>
-                            </div>
+                {/* Features */}
+                <div className="about-features">
+                    <div className="about-feature">
+                        <div className="about-feature-icon">
+                            <FaBolt />
+                        </div>
+                        <div>
+                            <h4>Fast Delivery</h4>
+                            <p>Quick turnaround without compromising quality</p>
+                        </div>
+                    </div>
+                    <div className="about-feature">
+                        <div className="about-feature-icon">
+                            <FaShieldAlt />
+                        </div>
+                        <div>
+                            <h4>Quality Focused</h4>
+                            <p>We deliver only the highest quality work</p>
+                        </div>
+                    </div>
+                    <div className="about-feature">
+                        <div className="about-feature-icon">
+                            <FaHeadset />
+                        </div>
+                        <div>
+                            <h4>24/7 Support</h4>
+                            <p>Always here when you need us</p>
+                        </div>
+                    </div>
+                    <div className="about-feature">
+                        <div className="about-feature-icon">
+                            <FaChartLine />
+                        </div>
+                        <div>
+                            <h4>Results Driven</h4>
+                            <p>Focused on achieving your business goals</p>
                         </div>
                     </div>
                 </div>
 
-                {/* Team Section */}
-                <div className="section-header">
-                    <span className="section-label">Our Team</span>
-                    <h2 className="section-title">Meet the People Behind LoopersIT</h2>
-                </div>
+                {/* Team Lead Section */}
+                {leaders.length > 0 && (
+                    <div className="team-lead-section">
+                        <div className="section-header">
+                            <span className="section-label">Leadership</span>
+                            <h2 className="section-title">Meet Our Leaders</h2>
+                        </div>
 
-                <div className="team-grid">
-                    {team.map((member) => (
-                        <div key={member.id} className="team-card">
-                            <div className="team-card-image">
-                                {member.image ? (
-                                    <img src={member.image} alt={member.name} />
-                                ) : (
-                                    <span>{member.name.charAt(0)}</span>
-                                )}
-                            </div>
-                            <div className="team-card-content">
-                                {member.role === 'leader' && (
-                                    <span className="team-card-badge">Team Lead</span>
-                                )}
-                                <h3>{member.name}</h3>
-                                {member.designation && <p>{member.designation}</p>}
-                                <div className="team-social">
-                                    {member.linkedin && (
-                                        <a href={member.linkedin} target="_blank" rel="noopener noreferrer">
-                                            <i className="bi bi-linkedin"></i>
-                                        </a>
-                                    )}
-                                    {member.github && (
-                                        <a href={member.github} target="_blank" rel="noopener noreferrer">
-                                            <i className="bi bi-github"></i>
-                                        </a>
-                                    )}
-                                    {member.facebook && (
-                                        <a href={member.facebook} target="_blank" rel="noopener noreferrer">
-                                            <i className="bi bi-facebook"></i>
-                                        </a>
+                        {leaders.map((leader) => (
+                            <div key={leader.id} className="team-lead-card">
+                                <div className="team-lead-image">
+                                    {leader.image ? (
+                                        <img src={leader.image} alt={leader.name} />
+                                    ) : (
+                                        <div className="team-lead-placeholder">
+                                            {leader.name.charAt(0)}
+                                        </div>
                                     )}
                                 </div>
+                                <div className="team-lead-info">
+                                    <span className="team-lead-badge">Team Lead</span>
+                                    <h3>{leader.name}</h3>
+                                    {leader.designation && <p>{leader.designation}</p>}
+                                    <div className="team-lead-social">
+                                        {leader.linkedin && (
+                                            <a href={leader.linkedin} target="_blank" rel="noopener noreferrer">
+                                                <FaLinkedinIn />
+                                            </a>
+                                        )}
+                                        {leader.github && (
+                                            <a href={leader.github} target="_blank" rel="noopener noreferrer">
+                                                <FaGithub />
+                                            </a>
+                                        )}
+                                        {leader.facebook && (
+                                            <a href={leader.facebook} target="_blank" rel="noopener noreferrer">
+                                                <FaFacebookF />
+                                            </a>
+                                        )}
+                                    </div>
+                                </div>
                             </div>
+                        ))}
+                    </div>
+                )}
+
+                {/* Team Members Section */}
+                {members.length > 0 && (
+                    <>
+                        <div className="section-header">
+                            <span className="section-label">Our Team</span>
+                            <h2 className="section-title">Meet the Team</h2>
                         </div>
-                    ))}
-                </div>
+
+                        <div className="team-members-grid">
+                            {members.map((member) => (
+                                <div key={member.id} className="team-member-card">
+                                    <div className="team-member-image">
+                                        {member.image ? (
+                                            <img src={member.image} alt={member.name} />
+                                        ) : (
+                                            <span>{member.name.charAt(0)}</span>
+                                        )}
+                                    </div>
+                                    <div className="team-member-content">
+                                        <h3>{member.name}</h3>
+                                        {member.designation && <p>{member.designation}</p>}
+                                        <div className="team-member-social">
+                                            {member.linkedin && (
+                                                <a href={member.linkedin} target="_blank" rel="noopener noreferrer">
+                                                    <FaLinkedinIn />
+                                                </a>
+                                            )}
+                                            {member.github && (
+                                                <a href={member.github} target="_blank" rel="noopener noreferrer">
+                                                    <FaGithub />
+                                                </a>
+                                            )}
+                                            {member.facebook && (
+                                                <a href={member.facebook} target="_blank" rel="noopener noreferrer">
+                                                    <FaFacebookF />
+                                                </a>
+                                            )}
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </>
+                )}
 
                 {team.length === 0 && (
                     <div style={{ textAlign: 'center', padding: '4rem 2rem' }}>
-                        <i className="bi bi-people" style={{ fontSize: '3rem', color: 'var(--text-muted)', marginBottom: '1rem', display: 'block' }}></i>
                         <p style={{ color: 'var(--text-light)' }}>Team information coming soon.</p>
                     </div>
                 )}

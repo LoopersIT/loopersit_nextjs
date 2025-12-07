@@ -1,4 +1,7 @@
 import Link from 'next/link';
+import { FaFacebookF, FaLinkedinIn, FaYoutube } from 'react-icons/fa';
+import { FaXTwitter } from 'react-icons/fa6';
+import { HiOutlineLocationMarker, HiOutlineMail } from 'react-icons/hi';
 import '@/styles/footer.css';
 
 interface Page {
@@ -51,16 +54,16 @@ export default async function Footer() {
                         </p>
                         <div className="footer-social">
                             <a href="https://facebook.com/loopersit" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
-                                <i className="bi bi-facebook"></i>
+                                <FaFacebookF />
                             </a>
                             <a href="https://linkedin.com/company/loopersit" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-                                <i className="bi bi-linkedin"></i>
+                                <FaLinkedinIn />
                             </a>
                             <a href="https://twitter.com/loopersit" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
-                                <i className="bi bi-twitter-x"></i>
+                                <FaXTwitter />
                             </a>
                             <a href="https://youtube.com/@loopersit" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
-                                <i className="bi bi-youtube"></i>
+                                <FaYoutube />
                             </a>
                         </div>
                     </div>
@@ -93,11 +96,11 @@ export default async function Footer() {
                     <div className="footer-links-section">
                         <h4>Contact</h4>
                         <div className="footer-contact-item">
-                            <i className="bi bi-geo-alt"></i>
+                            <HiOutlineLocationMarker className="footer-contact-icon" />
                             <span>Mirpur, Dhaka-1100<br />Bangladesh</span>
                         </div>
                         <div className="footer-contact-item">
-                            <i className="bi bi-envelope"></i>
+                            <HiOutlineMail className="footer-contact-icon" />
                             <a href="mailto:support@loopersit.com">support@loopersit.com</a>
                         </div>
                     </div>

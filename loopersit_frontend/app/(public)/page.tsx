@@ -1,4 +1,6 @@
 import Link from 'next/link';
+import { FaCode, FaMobileAlt, FaPalette, FaBullhorn, FaCloud, FaShieldAlt } from 'react-icons/fa';
+import { HiOutlineArrowRight, HiOutlineCheckCircle, HiOutlineStar } from 'react-icons/hi';
 import '@/styles/homepage.css';
 
 interface Service {
@@ -32,6 +34,9 @@ interface ProjectSummary {
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000';
 
+// Icon mapping for services
+const serviceIcons = [FaCode, FaMobileAlt, FaPalette, FaBullhorn, FaCloud, FaShieldAlt];
+
 async function getHomeData() {
     try {
         const [servicesRes, reviewsRes, pricingRes, statsRes] = await Promise.all([
@@ -61,10 +66,6 @@ export default async function HomePage() {
             <section className="hero">
                 <div className="hero-container">
                     <div className="hero-content">
-                        <div className="hero-badge">
-                            <i className="bi bi-lightning-charge-fill"></i>
-                            Software Development Agency
-                        </div>
                         <h1 className="hero-title">
                             Building Websites,<br />
                             <span>Growing Business</span> Online
@@ -112,20 +113,23 @@ export default async function HomePage() {
                     </div>
 
                     <div className="services-grid">
-                        {services.slice(0, 6).map((service: Service) => (
-                            <Link key={service.id} href={`/services/${service.slug}`} className="service-card">
-                                <div className="service-icon">
-                                    <i className="bi bi-code-slash"></i>
-                                </div>
-                                <h3>{service.name}</h3>
-                                <p>{service.description.slice(0, 100)}...</p>
-                            </Link>
-                        ))}
+                        {services.slice(0, 6).map((service: Service, index: number) => {
+                            const IconComponent = serviceIcons[index % serviceIcons.length];
+                            return (
+                                <Link key={service.id} href={`/services/${service.slug}`} className="service-card">
+                                    <div className="service-icon">
+                                        <IconComponent />
+                                    </div>
+                                    <h3>{service.name}</h3>
+                                    <p>{service.description.slice(0, 100)}...</p>
+                                </Link>
+                            );
+                        })}
                     </div>
 
                     <div className="services-cta">
                         <Link href="/services" className="btn btn-outline">
-                            View All Services →
+                            View All Services <HiOutlineArrowRight />
                         </Link>
                     </div>
                 </div>
@@ -145,6 +149,11 @@ export default async function HomePage() {
                     <div className="reviews-grid">
                         {reviews.slice(0, 3).map((review: Review) => (
                             <div key={review.id} className="review-card">
+                                <div className="review-stars">
+                                    {[...Array(5)].map((_, i) => (
+                                        <HiOutlineStar key={i} className="star-icon" />
+                                    ))}
+                                </div>
                                 <p className="review-text">
                                     {review.review.length > 180 ? `${review.review.slice(0, 180)}...` : review.review}
                                 </p>
@@ -187,7 +196,7 @@ export default async function HomePage() {
                                 <ul className="pricing-features">
                                     {plan.features?.slice(0, 5).map((feature) => (
                                         <li key={feature.id}>
-                                            <i className="bi bi-check-circle-fill"></i>
+                                            <HiOutlineCheckCircle className="check-icon" />
                                             {feature.feature}
                                         </li>
                                     ))}

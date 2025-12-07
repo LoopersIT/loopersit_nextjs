@@ -1,3 +1,4 @@
+import { FaFolder, FaExternalLinkAlt } from 'react-icons/fa';
 import '@/styles/services.css';
 import '@/styles/portfolio.css';
 
@@ -43,24 +44,27 @@ export default async function PortfolioPage() {
             </section>
 
             <div className="page-content">
-                <div className="portfolio-grid">
-                    {projects.map((project) => (
-                        <div key={project.id} className="portfolio-card">
-                            <div className="portfolio-card-image">
+                <div className="portfolio-masonry">
+                    {projects.map((project, index) => (
+                        <div key={project.id} className={`portfolio-item ${index === 0 ? 'featured' : ''}`}>
+                            <div className="portfolio-image">
                                 {project.image ? (
                                     <img src={project.image} alt={project.title} />
                                 ) : (
-                                    <i className="bi bi-folder"></i>
+                                    <div className="portfolio-placeholder">
+                                        <FaFolder />
+                                    </div>
                                 )}
+                                <div className="portfolio-overlay">
+                                    <span className="portfolio-duration-badge">{project.duration}</span>
+                                </div>
                             </div>
-                            <div className="portfolio-card-content">
+                            <div className="portfolio-content">
                                 <h3>{project.title}</h3>
-                                <span className="portfolio-card-duration">{project.duration}</span>
                                 <p>{project.detail}</p>
                                 {project.link && (
-                                    <a href={project.link} target="_blank" rel="noopener noreferrer" className="portfolio-card-link">
-                                        <i className="bi bi-box-arrow-up-right"></i>
-                                        View Project
+                                    <a href={project.link} target="_blank" rel="noopener noreferrer" className="portfolio-link">
+                                        View Project <FaExternalLinkAlt size={12} />
                                     </a>
                                 )}
                             </div>
@@ -70,7 +74,7 @@ export default async function PortfolioPage() {
 
                 {projects.length === 0 && (
                     <div style={{ textAlign: 'center', padding: '4rem 2rem' }}>
-                        <i className="bi bi-folder" style={{ fontSize: '3rem', color: 'var(--text-muted)', marginBottom: '1rem', display: 'block' }}></i>
+                        <FaFolder style={{ fontSize: '3rem', color: 'var(--text-muted)', marginBottom: '1rem' }} />
                         <p style={{ color: 'var(--text-light)' }}>No portfolio items yet.</p>
                     </div>
                 )}

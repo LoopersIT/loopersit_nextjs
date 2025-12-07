@@ -91,12 +91,23 @@
     margin-bottom: 1rem;
     color: rgba(255, 255, 255, 0.8);
     font-size: 0.9rem;
+    line-height: 1.5;
 }
 
-.footer-contact-item i {
+.footer-contact-item .footer-contact-icon {
     color: var(--secondary);
-    font-size: 1rem;
-    margin-top: 0.15rem;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.footer-contact-item a {
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+}
+
+.footer-contact-item a:hover {
+    color: var(--secondary);
 }
 
 /* Social Links */

@@ -3,7 +3,7 @@
 /* Hero Section */
 .hero {
     background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
-    padding: 4rem 0 5rem;
+    padding: 2.5rem 0 3.5rem;
     position: relative;
     overflow: hidden;
 }
@@ -166,9 +166,6 @@
     align-items: center;
     justify-content: center;
     margin-bottom: 1.25rem;
-}
-
-.service-icon i {
     font-size: 1.5rem;
     color: var(--secondary);
 }
@@ -439,7 +436,7 @@
 
 @media (min-width: 1024px) {
     .hero {
-        padding: 5rem 0 6rem;
+        padding: 3rem 0 4rem;
     }
 
     .hero-title {
