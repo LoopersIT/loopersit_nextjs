@@ -53,3 +53,32 @@ export async function POST(
         return NextResponse.json({ error: 'Failed to create feature' }, { status: 500 });
     }
 }
+
+// DELETE /api/pricing/[id]/features?featureId=123 - Delete a feature
+export async function DELETE(
+    request: NextRequest,
+    { params }: { params: Promise<{ id: string }> }
+) {
+    try {
+        const session = await getServerSession();
+        if (!session) {
+            return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+        }
+
+        const { searchParams } = new URL(request.url);
+        const featureId = searchParams.get('featureId');
+
+        if (!featureId) {
+            return NextResponse.json({ error: 'Feature ID is required' }, { status: 400 });
+        }
+
+        await prisma.priceFeature.delete({
+            where: { id: parseInt(featureId) },
+        });
+
+        return NextResponse.json({ success: true });
+    } catch (error) {
+        console.error('Error deleting feature:', error);
+        return NextResponse.json({ error: 'Failed to delete feature' }, { status: 500 });
+    }
+}

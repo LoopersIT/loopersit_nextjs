@@ -1,0 +1,404 @@
+/* Modern Glass Pricing Page */
+
+/* Hero Section */
+.pricing-hero {
+    position: relative;
+    padding: 5rem 1.5rem 8rem;
+    text-align: center;
+    overflow: hidden;
+    background: linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #4c1d95 100%);
+}
+
+.pricing-hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(circle at 20% 30%, rgba(99, 102, 241, 0.3) 0%, transparent 40%),
+        radial-gradient(circle at 80% 70%, rgba(139, 92, 246, 0.3) 0%, transparent 40%),
+        radial-gradient(circle at 50% 50%, rgba(35, 173, 173, 0.2) 0%, transparent 50%);
+    animation: heroFloat 15s ease-in-out infinite;
+}
+
+@keyframes heroFloat {
+
+    0%,
+    100% {
+        transform: scale(1) rotate(0deg);
+    }
+
+    50% {
+        transform: scale(1.1) rotate(3deg);
+    }
+}
+
+.pricing-hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.pricing-hero-badge {
+    display: inline-block;
+    padding: 0.5rem 1.25rem;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50px;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.875rem;
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+}
+
+.pricing-hero h1 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: white;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+}
+
+.pricing-hero p {
+    font-size: 1.15rem;
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.7;
+}
+
+/* Pricing Cards Section */
+.pricing-cards-section {
+    margin-top: -4rem;
+    padding: 0 1.5rem 5rem;
+    position: relative;
+    z-index: 10;
+}
+
+.pricing-cards-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Glass Pricing Card */
+.glass-pricing-card {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    border-radius: 24px;
+    padding: 2.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    box-shadow:
+        0 25px 50px -12px rgba(30, 27, 75, 0.15),
+        0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+    transition: all 0.4s ease;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.glass-pricing-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--secondary), var(--primary));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.glass-pricing-card:hover {
+    transform: translateY(-8px);
+    box-shadow:
+        0 35px 60px -15px rgba(30, 27, 75, 0.25),
+        0 0 0 1px rgba(99, 102, 241, 0.3) inset;
+}
+
+.glass-pricing-card:hover::before {
+    opacity: 1;
+}
+
+/* Featured Card */
+.glass-pricing-card.featured {
+    background: linear-gradient(135deg, rgba(30, 27, 75, 0.95) 0%, rgba(49, 46, 129, 0.95) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow:
+        0 25px 50px -12px rgba(99, 102, 241, 0.3),
+        0 0 80px -20px rgba(139, 92, 246, 0.4);
+}
+
+.glass-pricing-card.featured::before {
+    background: linear-gradient(90deg, var(--secondary), #a78bfa);
+    opacity: 1;
+    height: 4px;
+}
+
+.glass-pricing-card.featured:hover {
+    transform: translateY(-12px) scale(1.02);
+}
+
+.featured-ribbon {
+    position: absolute;
+    top: 1rem;
+    right: -2.5rem;
+    background: linear-gradient(135deg, var(--secondary), #14b8a6);
+    color: white;
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 0.35rem 3rem;
+    transform: rotate(45deg);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Card Header */
+.glass-card-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.glass-card-icon {
+    width: 70px;
+    height: 70px;
+    background: linear-gradient(135deg, var(--primary), #6366f1);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.25rem;
+    color: white;
+    font-size: 1.75rem;
+    box-shadow: 0 10px 30px -10px rgba(99, 102, 241, 0.5);
+}
+
+.glass-pricing-card.featured .glass-card-icon {
+    background: linear-gradient(135deg, var(--secondary), #14b8a6);
+    box-shadow: 0 10px 30px -10px rgba(35, 173, 173, 0.5);
+}
+
+.glass-card-header h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+}
+
+.glass-pricing-card.featured .glass-card-header h3 {
+    color: white;
+}
+
+.glass-card-price {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--secondary);
+}
+
+.glass-pricing-card.featured .glass-card-price {
+    color: #5eead4;
+}
+
+/* Features */
+.glass-card-features {
+    flex-grow: 1;
+    margin-bottom: 2rem;
+}
+
+.glass-feature-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.glass-pricing-card.featured .glass-feature-item {
+    border-bottom-color: rgba(255, 255, 255, 0.1);
+}
+
+.glass-feature-item:last-child {
+    border-bottom: none;
+}
+
+.glass-feature-item svg {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    color: var(--secondary);
+    margin-top: 2px;
+}
+
+.glass-pricing-card.featured .glass-feature-item svg {
+    color: #5eead4;
+}
+
+.glass-feature-item span {
+    font-size: 0.95rem;
+    color: var(--text);
+    line-height: 1.5;
+}
+
+.glass-pricing-card.featured .glass-feature-item span {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* Button */
+.glass-card-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 1rem 2rem;
+    background: transparent;
+    border: 2px solid var(--primary);
+    color: var(--primary);
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.glass-card-button:hover {
+    background: var(--primary);
+    color: white;
+    gap: 0.75rem;
+}
+
+.glass-card-button.primary {
+    background: linear-gradient(135deg, var(--secondary), #14b8a6);
+    border: none;
+    color: white;
+    box-shadow: 0 10px 30px -10px rgba(35, 173, 173, 0.5);
+}
+
+.glass-card-button.primary:hover {
+    transform: scale(1.02);
+    box-shadow: 0 15px 40px -10px rgba(35, 173, 173, 0.6);
+}
+
+/* Empty State */
+.pricing-empty {
+    text-align: center;
+    padding: 4rem 2rem;
+    color: var(--text-light);
+}
+
+.pricing-empty svg {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    opacity: 0.3;
+}
+
+/* Custom Quote Section */
+.custom-quote-section {
+    padding: 0 1.5rem 5rem;
+}
+
+.custom-quote-glass {
+    max-width: 900px;
+    margin: 0 auto;
+    background: linear-gradient(135deg, rgba(30, 27, 75, 0.95) 0%, rgba(76, 29, 149, 0.95) 100%);
+    backdrop-filter: blur(20px);
+    border-radius: 24px;
+    padding: 3rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow:
+        0 25px 50px -12px rgba(30, 27, 75, 0.3),
+        0 0 100px -30px rgba(139, 92, 246, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.custom-quote-glass::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(99, 102, 241, 0.2) 0%, transparent 70%);
+    animation: quoteFloat 10s ease-in-out infinite;
+}
+
+@keyframes quoteFloat {
+
+    0%,
+    100% {
+        transform: translate(0, 0);
+    }
+
+    50% {
+        transform: translate(-20px, 20px);
+    }
+}
+
+.custom-quote-content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+}
+
+.custom-quote-content h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 1rem;
+}
+
+.custom-quote-content p {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 2rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.custom-quote-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem 2.5rem;
+    background: white;
+    color: var(--primary);
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.custom-quote-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 40px -10px rgba(255, 255, 255, 0.3);
+    gap: 0.75rem;
+}
+
+/* Responsive */
+@media (min-width: 768px) {
+    .pricing-hero h1 {
+        font-size: 3.5rem;
+    }
+
+    .pricing-cards-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 1024px) {
+    .pricing-cards-container {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .glass-pricing-card.featured {
+        transform: scale(1.05);
+    }
+
+    .glass-pricing-card.featured:hover {
+        transform: translateY(-12px) scale(1.08);
+    }
+}

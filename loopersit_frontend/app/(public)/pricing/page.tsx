@@ -1,6 +1,7 @@
 import Link from 'next/link';
-import '@/styles/services.css';
-import '@/styles/homepage.css';
+import { HiOutlineCheckCircle, HiOutlineArrowRight } from 'react-icons/hi';
+import { FaRocket, FaStar, FaCrown, FaDollarSign } from 'react-icons/fa';
+import '@/styles/pricing-page.css';
 
 interface PriceFeature {
     id: number;
@@ -16,6 +17,13 @@ interface Pricing {
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000';
 
+// Icon mapping for plan types
+const planIcons: { [key: string]: React.ElementType } = {
+    'basic': FaRocket,
+    'standard': FaStar,
+    'enterprise': FaCrown,
+};
+
 async function getPricing(): Promise<Pricing[]> {
     try {
         const res = await fetch(`${API_URL}/api/pricing`, { cache: 'no-store' });
@@ -27,7 +35,7 @@ async function getPricing(): Promise<Pricing[]> {
 }
 
 export const metadata = {
-    title: 'Pricing',
+    title: 'Pricing Plans | LoopersIT',
     description: 'View our pricing plans and packages for web development services.',
 };
 
@@ -36,9 +44,12 @@ export default async function PricingPage() {
 
     return (
         <>
-            <section className="page-hero">
-                <div className="page-hero-content">
-                    <h1>Pricing Plans</h1>
+            {/* Hero Section with Glass Background */}
+            <section className="pricing-hero">
+                <div className="pricing-hero-bg"></div>
+                <div className="pricing-hero-content">
+                    <span className="pricing-hero-badge">Transparent Pricing</span>
+                    <h1>Choose Your Perfect Plan</h1>
                     <p>
                         Simple, transparent pricing that scales with your business.
                         No hidden fees, no surprises.
@@ -46,54 +57,70 @@ export default async function PricingPage() {
                 </div>
             </section>
 
-            <div className="page-content">
-                <div className="pricing-grid">
-                    {pricing.map((plan) => (
-                        <div key={plan.id} className="pricing-card">
-                            <h3>{plan.name}</h3>
-                            <div className="pricing-price">{plan.priceRange}</div>
-                            <ul className="pricing-features">
-                                {plan.features?.map((feature) => (
-                                    <li key={feature.id}>
-                                        <i className="bi bi-check-circle-fill"></i>
-                                        {feature.feature}
-                                    </li>
-                                ))}
-                            </ul>
-                            <Link
-                                href="/contact"
-                                className="btn btn-outline"
-                                style={{ width: '100%' }}
-                            >
-                                Get Started
-                            </Link>
-                        </div>
-                    ))}
+            {/* Pricing Cards Section */}
+            <section className="pricing-cards-section">
+                <div className="pricing-cards-container">
+                    {pricing.map((plan, index) => {
+                        const planKey = plan.name.toLowerCase();
+                        const IconComponent = planIcons[planKey] || FaDollarSign;
+
+                        return (
+                            <div key={plan.id} className={`glass-pricing-card ${index === 1 ? 'featured' : ''}`}>
+                                {index === 1 && (
+                                    <div className="featured-ribbon">Most Popular</div>
+                                )}
+
+                                <div className="glass-card-header">
+                                    <div className="glass-card-icon">
+                                        <IconComponent />
+                                    </div>
+                                    <h3>{plan.name}</h3>
+                                    <div className="glass-card-price">{plan.priceRange}</div>
+                                </div>
+
+                                <div className="glass-card-features">
+                                    {plan.features?.map((feature) => (
+                                        <div key={feature.id} className="glass-feature-item">
+                                            <HiOutlineCheckCircle />
+                                            <span>{feature.feature}</span>
+                                        </div>
+                                    ))}
+                                </div>
+
+                                <Link
+                                    href="/contact"
+                                    className={`glass-card-button ${index === 1 ? 'primary' : ''}`}
+                                >
+                                    Get Started <HiOutlineArrowRight />
+                                </Link>
+                            </div>
+                        );
+                    })}
                 </div>
 
                 {pricing.length === 0 && (
-                    <div style={{ textAlign: 'center', padding: '4rem 2rem' }}>
-                        <i className="bi bi-currency-dollar" style={{ fontSize: '3rem', color: 'var(--text-muted)', marginBottom: '1rem', display: 'block' }}></i>
-                        <p style={{ color: 'var(--text-light)' }}>Pricing information coming soon.</p>
+                    <div className="pricing-empty">
+                        <FaDollarSign />
+                        <p>Pricing information coming soon.</p>
                     </div>
                 )}
+            </section>
 
-                {/* Custom Quote Section */}
-                <div className="cta-section" style={{ paddingBottom: 0 }}>
-                    <div className="cta-box">
-                        <div className="cta-content">
-                            <h2>Need a Custom Quote?</h2>
-                            <p>
-                                Every project is unique. Contact us for a personalized
-                                quote tailored to your specific requirements.
-                            </p>
-                            <Link href="/contact" className="btn btn-white">
-                                Request Custom Quote
-                            </Link>
-                        </div>
+            {/* Custom Quote Section */}
+            <section className="custom-quote-section">
+                <div className="custom-quote-glass">
+                    <div className="custom-quote-content">
+                        <h2>Need a Custom Solution?</h2>
+                        <p>
+                            Every project is unique. Let&apos;s discuss your requirements
+                            and create a tailored package just for you.
+                        </p>
+                        <Link href="/contact" className="custom-quote-btn">
+                            Request Custom Quote <HiOutlineArrowRight />
+                        </Link>
                     </div>
                 </div>
-            </div>
+            </section>
         </>
     );
 }

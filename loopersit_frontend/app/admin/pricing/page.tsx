@@ -161,7 +161,7 @@ export default function PricingPage() {
                                 <input
                                     type="number"
                                     value={formData.order}
-                                    onChange={(e) => setFormData({ ...formData, order: parseInt(e.target.value) })}
+                                    onChange={(e) => setFormData({ ...formData, order: parseInt(e.target.value) || 1 })}
                                     min="1"
                                     className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
                                 />
@@ -218,7 +218,7 @@ export default function PricingPage() {
                             <p className="text-sm font-semibold text-gray-700 mb-2">
                                 {plan.features.length} Features
                             </p>
-                            <ul className="space-y-2">
+                            <ul className="space-y-2 mb-4">
                                 {plan.features.slice(0, 3).map((feature) => (
                                     <li key={feature.id} className="text-sm text-gray-600 flex items-start gap-2">
                                         <span className="text-green-500 mt-0.5">✓</span>
@@ -231,6 +231,12 @@ export default function PricingPage() {
                                     </li>
                                 )}
                             </ul>
+                            <Link
+                                href={`/admin/pricing/${plan.id}`}
+                                className="inline-flex items-center gap-2 text-sm text-indigo-600 hover:text-indigo-800 font-medium"
+                            >
+                                <Plus size={16} /> Manage Features
+                            </Link>
                         </div>
                     </div>
                 ))}
