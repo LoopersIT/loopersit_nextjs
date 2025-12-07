@@ -42,6 +42,7 @@
 
 .footer-logo-text span {
     color: var(--secondary);
+    margin-left: 2px;
 }
 
 .footer-tagline {

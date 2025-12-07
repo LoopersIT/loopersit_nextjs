@@ -264,6 +264,11 @@
     color: var(--text-light);
 }
 
+.reviews-cta {
+    text-align: center;
+    margin-top: 2.5rem;
+}
+
 /* Pricing Section */
 .pricing-section {
     padding: 5rem 0;

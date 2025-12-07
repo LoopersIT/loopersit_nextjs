@@ -111,7 +111,7 @@ async function main() {
             data: {
                 title: 'About Us',
                 slug: 'about',
-                linkOnFooter: true,
+                linkOnFooter: false,
                 content: '<h2>Who We Are</h2><p>LoopersIT is a leading software development company dedicated to helping businesses succeed in the digital world. Founded in 2020, we have grown into a team of passionate developers, designers, and strategists.</p><h2>Our Mission</h2><p>To deliver innovative, high-quality software solutions that empower businesses to achieve their goals.</p><h2>Our Values</h2><ul><li>Excellence in everything we do</li><li>Client-focused approach</li><li>Continuous innovation</li><li>Transparency and integrity</li></ul>',
             }
         }),

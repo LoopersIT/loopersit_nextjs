@@ -100,7 +100,7 @@ export default async function AboutPage() {
                     </div>
                 </div>
 
-                {/* Team Lead Section */}
+                {/* Team Lead Section with Glass Cards */}
                 {leaders.length > 0 && (
                     <div className="team-lead-section">
                         <div className="section-header">
@@ -108,47 +108,47 @@ export default async function AboutPage() {
                             <h2 className="section-title">Meet Our Leaders</h2>
                         </div>
 
-                        {leaders.map((leader) => (
-                            <div key={leader.id} className="team-lead-card">
-                                <div className="team-lead-image">
-                                    {leader.image ? (
-                                        <img src={leader.image} alt={leader.name} />
-                                    ) : (
-                                        <div className="team-lead-placeholder">
-                                            {leader.name.charAt(0)}
-                                        </div>
-                                    )}
-                                </div>
-                                <div className="team-lead-info">
-                                    <span className="team-lead-badge">Team Lead</span>
-                                    <h3>{leader.name}</h3>
-                                    {leader.designation && <p>{leader.designation}</p>}
-                                    <div className="team-lead-social">
-                                        {leader.linkedin && (
-                                            <a href={leader.linkedin} target="_blank" rel="noopener noreferrer">
-                                                <FaLinkedinIn />
-                                            </a>
-                                        )}
-                                        {leader.github && (
-                                            <a href={leader.github} target="_blank" rel="noopener noreferrer">
-                                                <FaGithub />
-                                            </a>
-                                        )}
-                                        {leader.facebook && (
-                                            <a href={leader.facebook} target="_blank" rel="noopener noreferrer">
-                                                <FaFacebookF />
-                                            </a>
+                        <div className="team-lead-grid">
+                            {leaders.map((leader) => (
+                                <div key={leader.id} className="team-lead-card">
+                                    <div className="team-lead-image-wrapper">
+                                        {leader.image ? (
+                                            <img src={leader.image} alt={leader.name} />
+                                        ) : (
+                                            <span>{leader.name.charAt(0)}</span>
                                         )}
                                     </div>
+                                    <div className="team-lead-content">
+                                        <span className="team-lead-badge">Team Lead</span>
+                                        <h3>{leader.name}</h3>
+                                        {leader.designation && <p>{leader.designation}</p>}
+                                        <div className="team-lead-social">
+                                            {leader.linkedin && (
+                                                <a href={leader.linkedin} target="_blank" rel="noopener noreferrer">
+                                                    <FaLinkedinIn />
+                                                </a>
+                                            )}
+                                            {leader.github && (
+                                                <a href={leader.github} target="_blank" rel="noopener noreferrer">
+                                                    <FaGithub />
+                                                </a>
+                                            )}
+                                            {leader.facebook && (
+                                                <a href={leader.facebook} target="_blank" rel="noopener noreferrer">
+                                                    <FaFacebookF />
+                                                </a>
+                                            )}
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        ))}
+                            ))}
+                        </div>
                     </div>
                 )}
 
                 {/* Team Members Section */}
                 {members.length > 0 && (
-                    <>
+                    <div className="team-members-section">
                         <div className="section-header">
                             <span className="section-label">Our Team</span>
                             <h2 className="section-title">Meet the Team</h2>
@@ -157,7 +157,7 @@ export default async function AboutPage() {
                         <div className="team-members-grid">
                             {members.map((member) => (
                                 <div key={member.id} className="team-member-card">
-                                    <div className="team-member-image">
+                                    <div className="team-member-image-wrapper">
                                         {member.image ? (
                                             <img src={member.image} alt={member.name} />
                                         ) : (
@@ -166,7 +166,7 @@ export default async function AboutPage() {
                                     </div>
                                     <div className="team-member-content">
                                         <h3>{member.name}</h3>
-                                        {member.designation && <p>{member.designation}</p>}
+                                        {member.designation && <span className="designation">{member.designation}</span>}
                                         <div className="team-member-social">
                                             {member.linkedin && (
                                                 <a href={member.linkedin} target="_blank" rel="noopener noreferrer">
@@ -188,7 +188,7 @@ export default async function AboutPage() {
                                 </div>
                             ))}
                         </div>
-                    </>
+                    </div>
                 )}
 
                 {team.length === 0 && (

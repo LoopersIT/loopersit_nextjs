@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { FaCode, FaMobileAlt, FaPalette, FaBullhorn, FaCloud, FaShieldAlt } from 'react-icons/fa';
-import { HiOutlineArrowRight, HiOutlineCheckCircle, HiOutlineStar } from 'react-icons/hi';
+import { HiOutlineArrowRight, HiOutlineCheckCircle } from 'react-icons/hi';
 import '@/styles/homepage.css';
 
 interface Service {
@@ -149,11 +149,6 @@ export default async function HomePage() {
                     <div className="reviews-grid">
                         {reviews.slice(0, 3).map((review: Review) => (
                             <div key={review.id} className="review-card">
-                                <div className="review-stars">
-                                    {[...Array(5)].map((_, i) => (
-                                        <HiOutlineStar key={i} className="star-icon" />
-                                    ))}
-                                </div>
                                 <p className="review-text">
                                     {review.review.length > 180 ? `${review.review.slice(0, 180)}...` : review.review}
                                 </p>
@@ -172,6 +167,12 @@ export default async function HomePage() {
                                 </div>
                             </div>
                         ))}
+                    </div>
+
+                    <div className="reviews-cta">
+                        <Link href="/reviews" className="btn btn-outline">
+                            View All Reviews <HiOutlineArrowRight />
+                        </Link>
                     </div>
                 </div>
             </section>

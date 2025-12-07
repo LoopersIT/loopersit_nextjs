@@ -1,4 +1,4 @@
-/* About Page - New Design */
+/* About Page - Liquid Glass Design */
 .about-intro {
     text-align: center;
     max-width: 800px;
@@ -60,120 +60,89 @@
     margin: 0;
 }
 
-/* Team Lead Section */
+/* Team Lead Section - Purple Background */
 .team-lead-section {
     margin-bottom: 4rem;
-}
-
-.team-lead-card {
-    background: linear-gradient(135deg, var(--primary), var(--primary-light));
+    background: var(--primary);
     border-radius: var(--radius-lg);
-    padding: 2.5rem;
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 2rem;
-    align-items: center;
-    color: var(--white);
+    padding: 3rem 2rem;
+    position: relative;
+    overflow: hidden;
 }
 
-.team-lead-image {
-    width: 180px;
-    height: 180px;
+.team-lead-section::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 60%;
+    height: 150%;
+    background: radial-gradient(circle, rgba(35, 173, 173, 0.3) 0%, transparent 70%);
     border-radius: 50%;
-    overflow: hidden;
-    border: 4px solid var(--secondary);
-    margin: 0 auto;
 }
 
-.team-lead-image img {
-    width: 100%;
+.team-lead-section::after {
+    content: '';
+    position: absolute;
+    bottom: -30%;
+    left: -10%;
+    width: 40%;
     height: 100%;
-    object-fit: cover;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 60%);
+    border-radius: 50%;
 }
 
-.team-lead-placeholder {
-    width: 100%;
-    height: 100%;
-    background: var(--secondary);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 4rem;
-    font-weight: 600;
+.team-lead-section .section-header {
+    position: relative;
+    z-index: 1;
+    margin-bottom: 2rem;
 }
 
-.team-lead-info {
-    text-align: center;
+.team-lead-section .section-label {
+    color: var(--secondary);
 }
 
-.team-lead-badge {
-    display: inline-block;
-    background: var(--secondary);
+.team-lead-section .section-title {
     color: var(--white);
-    padding: 0.35rem 1rem;
-    border-radius: 50px;
-    font-size: 0.8rem;
-    font-weight: 600;
-    margin-bottom: 0.75rem;
 }
 
-.team-lead-info h3 {
-    font-size: 1.75rem;
-    margin-bottom: 0.25rem;
-}
-
-.team-lead-info p {
-    font-size: 1rem;
-    opacity: 0.9;
-    margin-bottom: 1rem;
-}
-
-.team-lead-social {
-    display: flex;
-    justify-content: center;
-    gap: 0.75rem;
-}
-
-.team-lead-social a {
-    width: 40px;
-    height: 40px;
-    background: rgba(255, 255, 255, 0.15);
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--white);
-    font-size: 1.1rem;
-    transition: var(--transition);
-}
-
-.team-lead-social a:hover {
-    background: var(--secondary);
-}
-
-/* Team Members Grid */
-.team-members-grid {
+/* Leader Cards Grid */
+.team-lead-grid {
+    position: relative;
+    z-index: 1;
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 1.5rem;
+    justify-items: center;
 }
 
-.team-member-card {
-    background: var(--white);
+/* Liquid Glass Leader Card */
+.team-lead-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: var(--radius-lg);
     overflow: hidden;
-    box-shadow: var(--shadow);
+    width: 100%;
+    max-width: 320px;
+    text-align: center;
+    box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
     transition: var(--transition);
 }
 
-.team-member-card:hover {
+.team-lead-card:hover {
     transform: translateY(-5px);
-    box-shadow: var(--shadow-lg);
+    box-shadow:
+        0 16px 48px rgba(0, 0, 0, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
 }
 
-.team-member-image {
-    height: 160px;
-    background: linear-gradient(135deg, var(--secondary), var(--primary));
+.team-lead-image-wrapper {
+    height: 200px;
+    background: linear-gradient(135deg, rgba(35, 173, 173, 0.3), rgba(255, 255, 255, 0.1));
     display: flex;
     align-items: center;
     justify-content: center;
@@ -181,33 +150,153 @@
     overflow: hidden;
 }
 
-.team-member-image img {
+.team-lead-image-wrapper::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(transparent 50%, rgba(0, 0, 0, 0.3));
+}
+
+.team-lead-image-wrapper img {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
 
-.team-member-image span {
-    font-size: 3rem;
+.team-lead-image-wrapper span {
+    font-size: 4rem;
     color: var(--white);
     font-weight: 600;
+    position: relative;
+    z-index: 1;
 }
 
-.team-member-content {
-    padding: 1.25rem;
-    text-align: center;
+.team-lead-content {
+    padding: 1.5rem;
+    color: var(--white);
 }
 
-.team-member-content h3 {
-    font-size: 1rem;
-    color: var(--primary);
+.team-lead-badge {
+    display: inline-block;
+    background: var(--secondary);
+    color: var(--white);
+    padding: 0.3rem 0.8rem;
+    border-radius: 50px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+}
+
+.team-lead-content h3 {
+    font-size: 1.25rem;
     margin-bottom: 0.25rem;
 }
 
-.team-member-content p {
+.team-lead-content p {
+    font-size: 0.9rem;
+    opacity: 0.85;
+    margin-bottom: 1rem;
+}
+
+.team-lead-social {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.team-lead-social a {
+    width: 36px;
+    height: 36px;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+    font-size: 0.95rem;
+    transition: var(--transition);
+}
+
+.team-lead-social a:hover {
+    background: var(--secondary);
+    transform: translateY(-2px);
+}
+
+/* Team Members Section */
+.team-members-section {
+    margin-top: 3rem;
+}
+
+.team-members-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+}
+
+/* Member Card */
+.team-member-card {
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+    text-align: center;
+}
+
+.team-member-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+.team-member-image-wrapper {
+    height: 200px;
+    background: linear-gradient(135deg, var(--primary), var(--primary-light));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.team-member-image-wrapper::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(transparent 50%, rgba(42, 29, 81, 0.5));
+}
+
+.team-member-image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.team-member-image-wrapper span {
+    font-size: 4rem;
+    color: var(--white);
+    font-weight: 600;
+    position: relative;
+    z-index: 1;
+}
+
+.team-member-content {
+    padding: 1.5rem;
+}
+
+.team-member-content h3 {
+    font-size: 1.1rem;
+    color: var(--primary);
+    margin-bottom: 0.25rem;
+    font-weight: 600;
+}
+
+.team-member-content .designation {
     font-size: 0.85rem;
     color: var(--text-light);
-    margin-bottom: 0.75rem;
+    margin-bottom: 1rem;
+    display: block;
 }
 
 .team-member-social {
@@ -217,39 +306,27 @@
 }
 
 .team-member-social a {
-    width: 32px;
-    height: 32px;
+    width: 36px;
+    height: 36px;
     background: var(--bg);
-    border-radius: 8px;
+    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     color: var(--text-muted);
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     transition: var(--transition);
 }
 
 .team-member-social a:hover {
     background: var(--secondary);
     color: var(--white);
+    transform: translateY(-2px);
 }
 
 @media (min-width: 768px) {
     .about-features {
         grid-template-columns: repeat(2, 1fr);
-    }
-
-    .team-lead-card {
-        grid-template-columns: auto 1fr;
-        text-align: left;
-    }
-
-    .team-lead-info {
-        text-align: left;
-    }
-
-    .team-lead-social {
-        justify-content: flex-start;
     }
 
     .team-members-grid {
@@ -262,7 +339,7 @@
         grid-template-columns: repeat(4, 1fr);
     }
 
-    .team-member-image {
-        height: 180px;
+    .team-member-image-wrapper {
+        height: 220px;
     }
 }
