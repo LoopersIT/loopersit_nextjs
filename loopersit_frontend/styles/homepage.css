@@ -1,510 +1,464 @@
-/* Homepage Styles */
-@import './base.css';
+/* Professional Homepage */
 
-.background_wave {
-    width: 100%;
-    min-height: 13.5rem;
-    background-image: url(/img/Vector.svg);
-    background-repeat: no-repeat;
-    background-position: right;
-    margin: 0;
+/* Hero Section */
+.hero {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+    padding: 4rem 0 5rem;
+    position: relative;
+    overflow: hidden;
 }
 
-/* Intro/Hero Section */
-.intro_card {
-    display: flex;
-    flex-direction: column;
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 50%;
+    height: 100%;
+    background: radial-gradient(circle at 70% 30%, rgba(35, 173, 173, 0.15) 0%, transparent 50%);
+}
+
+.hero-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
     align-items: center;
-    row-gap: 0.063rem;
-    margin: 0 0.5rem;
-    padding: 1rem;
-    padding-bottom: 1.5rem;
-    border-radius: 1.563rem;
-    border: 0.063rem solid #fff;
-    background: linear-gradient(108deg, rgba(255, 255, 255, 0.25) -8.57%, rgba(255, 255, 255, 0.15) 111.32%);
-    box-shadow: 0px 20px 40px 0px rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(10px);
 }
 
-.intro_img {
-    width: 15rem;
-    object-fit: cover;
+.hero-content {
+    position: relative;
+    z-index: 1;
 }
 
-.intro_tag {
-    font-size: 1.5rem;
-    text-align: center;
-    margin: 0.5rem 0 0 0;
-    font-weight: 600;
+.hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    color: var(--secondary);
+    font-size: 0.85rem;
+    font-weight: 500;
+    margin-bottom: 1.5rem;
 }
 
-.intro_details {
-    margin: 0.5rem;
-    text-align: center;
-    font-size: 1rem;
-    color: var(--text-dark);
+.hero-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1.2;
+    margin-bottom: 1.25rem;
 }
 
-.intro_buttons {
-    text-align: center;
-    padding-bottom: 0.625rem;
-    margin-top: 1.5rem;
+.hero-title span {
+    color: var(--secondary);
+}
+
+.hero-description {
+    font-size: 1.15rem;
+    color: rgba(255, 255, 255, 0.85);
+    line-height: 1.7;
+    margin-bottom: 2rem;
+    max-width: 500px;
+}
+
+.hero-buttons {
     display: flex;
-    gap: 0.625rem;
     flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.hero-image {
+    display: flex;
     justify-content: center;
 }
 
-.gap {
-    margin-top: 2rem;
+.hero-image img {
+    max-width: 100%;
+    height: auto;
+    filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.2));
+}
+
+/* Stats Bar */
+.stats-bar {
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    margin: -3rem 1.5rem 0;
+    position: relative;
+    z-index: 10;
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+    background: var(--border);
+}
+
+.stat-item {
+    background: var(--white);
+    padding: 1.5rem;
+    text-align: center;
+}
+
+.stat-item:first-child {
+    border-radius: var(--radius-lg) 0 0 var(--radius-lg);
+}
+
+.stat-item:last-child {
+    border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
+}
+
+.stat-number {
+    display: block;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 0.25rem;
+}
+
+.stat-label {
+    font-size: 0.85rem;
+    color: var(--text-light);
 }
 
 /* Services Section */
-.service_box {
-    display: flex;
-    flex-direction: column;
-    row-gap: 1.5rem;
-    margin: 0 0.5rem 1rem 0.5rem;
+.services-section {
+    padding: 5rem 0;
 }
 
-.services {
-    display: flex;
-    align-items: center;
-    gap: 1.2rem;
-    background-color: #fff;
-    padding: 1rem;
-    border-radius: 15px;
-    border-left: 1.25rem solid var(--secondary-color);
+.services-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+}
+
+.service-card {
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
     text-decoration: none;
-    color: var(--text-dark);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.services:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-}
-
-.service_svg {
-    background-color: #a7dede;
-    border-radius: 50%;
-    padding: 0.875rem 1rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-width: 60px;
-    min-height: 60px;
-}
-
-.service_img {
-    width: 2.5rem;
-    height: 2.5rem;
-    object-fit: cover;
-}
-
-.service_name {
-    font-size: 1.2rem;
-    font-weight: 500;
-}
-
-.all_services {
-    border-radius: 15px;
-    background: linear-gradient(90deg, rgba(42, 29, 81, 0.72) 7%, rgba(35, 173, 173, 0.9) 61.11%);
-    padding: 2.5rem;
-    margin: 0 0.5rem 1rem 0.5rem;
-    color: #fff;
-    text-align: center;
-}
-
-.all_service_link {
-    text-decoration: none;
-    color: #fff;
-}
-
-.all_service_name {
-    font-size: 1.2rem;
-    font-weight: 500;
-}
-
-/* Stats/Portfolio Section */
-.about_us {
-    background-color: #fff;
-    padding-bottom: 1.5rem;
-    border-radius: 15px;
-    margin: 0.625rem;
-}
-
-.about_stats {
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
-    gap: 0.8rem;
-    padding: 1rem;
-    min-height: 12rem;
-    border-radius: 15px;
-    border-top: 2rem solid var(--secondary-color);
-    flex-wrap: wrap;
-}
-
-.stats {
-    background-color: var(--secondary-color);
-    border-radius: 50%;
-    text-align: center;
-    padding: 1rem 0.8rem;
-    width: 5.7rem;
-    height: 5.7rem;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.hanging_line {
-    border-left: 4px dotted var(--secondary-color);
-    height: 4rem;
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    bottom: 100%;
-}
-
-.stats_number {
     display: block;
-    font-size: 1rem;
-    color: #fff;
-    font-weight: 700;
+    border-left: 4px solid var(--secondary);
 }
 
-.stats_details {
-    font-size: 10px;
-    color: #fff;
-    line-height: 1.2;
+.service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
 }
 
-.about_button {
+.service-icon {
+    width: 56px;
+    height: 56px;
+    background: linear-gradient(135deg, rgba(35, 173, 173, 0.1), rgba(42, 29, 81, 0.1));
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.25rem;
+}
+
+.service-icon i {
+    font-size: 1.5rem;
+    color: var(--secondary);
+}
+
+.service-card h3 {
+    font-size: 1.25rem;
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.service-card p {
+    font-size: 0.95rem;
+    color: var(--text-light);
+    line-height: 1.6;
+}
+
+.services-cta {
     text-align: center;
-    margin-top: 2rem;
+    margin-top: 2.5rem;
 }
 
 /* Reviews Section */
-.review_wrapper {
-    background-color: #fff;
-    padding: 2rem;
-    margin: 0 0.625rem;
-    border-radius: 15px;
+.reviews-section {
+    padding: 5rem 0;
+    background: linear-gradient(180deg, var(--bg) 0%, var(--white) 100%);
 }
 
-.review_profile {
+.reviews-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+}
+
+.review-card {
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+    box-shadow: var(--shadow);
+    position: relative;
+}
+
+.review-card::before {
+    content: '"';
+    position: absolute;
+    top: 1rem;
+    right: 1.5rem;
+    font-size: 4rem;
+    color: var(--secondary);
+    opacity: 0.2;
+    font-family: Georgia, serif;
+    line-height: 1;
+}
+
+.review-text {
+    font-size: 1rem;
+    color: var(--text);
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+}
+
+.review-author {
     display: flex;
     align-items: center;
-    border: 2px solid var(--secondary-color);
-    position: relative;
-    margin: 2.5rem 0.3rem;
-    border-radius: 100px;
-    min-height: 4rem;
-    text-decoration: none;
-    color: var(--text-dark);
-    padding: 0.5rem;
-    padding-left: 5rem;
+    gap: 1rem;
 }
 
-.reviewer_image {
-    width: 5rem;
-    height: 5rem;
-    border: 3px solid var(--secondary-color);
+.review-avatar {
+    width: 48px;
+    height: 48px;
     border-radius: 50%;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    left: -0.3rem;
-    object-fit: cover;
-    background-color: var(--secondary-color);
+    background: linear-gradient(135deg, var(--secondary), var(--primary));
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #fff;
-    font-size: 1.5rem;
+    color: var(--white);
     font-weight: 600;
+    font-size: 1.1rem;
 }
 
-.reviewer_details {
-    background-color: var(--primary-color);
-    text-align: center;
-    display: inline-block;
-    padding: 0.19rem 0.8rem;
-    border-radius: 0.938rem;
-    color: #fff;
-    position: absolute;
-    left: 4rem;
-    top: -1rem;
+.review-avatar img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
 }
 
-.reviewer_name {
-    font-size: 0.7rem;
-    margin: 0;
-    font-weight: 600;
+.review-info h4 {
+    font-size: 1rem;
+    color: var(--primary);
+    margin-bottom: 0.15rem;
 }
 
-.reviewer_designation {
-    font-size: 0.5rem;
-    margin: 0.2rem;
-    opacity: 0.9;
-}
-
-.review_text {
-    font-size: 0.8rem;
-    line-height: 1.4;
-}
-
-.review_button {
-    margin-top: 2rem;
-    text-align: center;
+.review-info p {
+    font-size: 0.85rem;
+    color: var(--text-light);
 }
 
 /* Pricing Section */
-.estimated_price {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 1rem;
-    padding: 0 0.625rem;
+.pricing-section {
+    padding: 5rem 0;
 }
 
-.price_card {
-    background-color: var(--primary-color);
-    color: #fff;
-    padding: 2rem;
-    border-radius: 15px;
-    width: 100%;
-    max-width: 320px;
+.pricing-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    max-width: 1000px;
+    margin: 0 auto;
 }
 
-.service_desc {
-    margin-bottom: 1rem;
+.pricing-card {
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    padding: 2.5rem 2rem;
+    box-shadow: var(--shadow);
     text-align: center;
+    position: relative;
+    transition: var(--transition);
 }
 
-.product_name {
-    font-size: 1.5rem;
+.pricing-card.featured {
+    background: var(--primary);
+    color: var(--white);
+    transform: scale(1.02);
+}
+
+.pricing-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+.pricing-card.featured:hover {
+    transform: scale(1.02) translateY(-5px);
+}
+
+.pricing-badge {
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--secondary);
+    color: var(--white);
+    padding: 0.35rem 1rem;
+    border-radius: 50px;
+    font-size: 0.75rem;
     font-weight: 600;
-    display: block;
 }
 
-.service_price {
-    display: block;
-    font-size: 1.1rem;
-    margin-top: 0.5rem;
-    color: var(--secondary-color);
+.pricing-card h3 {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
 }
 
-.offer_list {
-    margin-top: 1.5rem;
+.pricing-price {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--secondary);
+    margin-bottom: 1.5rem;
 }
 
-.offer_details {
-    margin: 0.8rem 0;
+.pricing-card.featured .pricing-price {
+    color: var(--secondary);
+}
+
+.pricing-features {
+    list-style: none;
+    text-align: left;
+    margin-bottom: 2rem;
+}
+
+.pricing-features li {
     display: flex;
-    align-items: center;
-    gap: 0.5rem;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 0.5rem 0;
+    font-size: 0.95rem;
 }
 
-.check_icons {
-    color: var(--secondary-color);
-    font-size: 1.2rem;
+.pricing-features i {
+    color: var(--secondary);
+    font-size: 1.1rem;
+    margin-top: 0.1rem;
 }
 
-.offer_desc {
-    font-size: 0.9rem;
+.pricing-card.featured .pricing-features li {
+    color: rgba(255, 255, 255, 0.9);
 }
 
-.price_button {
-    margin: 2rem 0 1rem 0;
+/* CTA Section */
+.cta-section {
+    padding: 5rem 0;
+}
+
+.cta-box {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+    border-radius: var(--radius-lg);
+    padding: 4rem 2rem;
     text-align: center;
+    position: relative;
+    overflow: hidden;
 }
 
-/* Responsive Styles */
-@media screen and (min-width: 769px) {
-    .background_wave {
-        min-height: 30rem;
+.cta-box::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 40%;
+    height: 100%;
+    background: radial-gradient(circle at center, rgba(35, 173, 173, 0.2) 0%, transparent 60%);
+}
+
+.cta-content {
+    position: relative;
+    z-index: 1;
+}
+
+.cta-content h2 {
+    font-size: 2rem;
+    color: var(--white);
+    margin-bottom: 1rem;
+}
+
+.cta-content p {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.85);
+    margin-bottom: 2rem;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Responsive */
+@media (min-width: 768px) {
+    .hero-container {
+        grid-template-columns: 1fr 1fr;
     }
 
-    .intro_card {
-        flex-direction: row-reverse;
-        align-items: unset;
-        justify-content: space-between;
-        margin: 0 1.5rem;
-        padding: 2rem;
+    .hero-title {
+        font-size: 3rem;
     }
 
-    .intro_paragraph {
-        margin: 2rem 0 0 2rem;
-        max-width: 50%;
+    .stats-grid {
+        grid-template-columns: repeat(4, 1fr);
     }
 
-    .intro_tag {
-        font-size: 2.3rem;
-        text-align: left;
+    .stat-item:first-child {
+        border-radius: var(--radius-lg) 0 0 var(--radius-lg);
     }
 
-    .intro_details {
-        margin: 0.625rem 0 2rem 0;
-        text-align: left;
-        font-size: 1.2rem;
+    .stat-item:last-child {
+        border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
     }
 
-    .intro_buttons {
-        justify-content: flex-start;
+    .services-grid {
+        grid-template-columns: repeat(2, 1fr);
     }
 
-    .intro_img {
-        width: 24rem;
-        height: 24rem;
-        margin: 0.7rem 0.5rem 0 0;
+    .reviews-grid {
+        grid-template-columns: repeat(2, 1fr);
     }
 
-    .gap {
-        margin-top: -1rem;
-    }
-
-    .service_box {
-        flex-direction: row;
-        justify-content: space-around;
-        column-gap: 1rem;
-        flex-wrap: wrap;
-    }
-
-    .services {
-        width: 48%;
-    }
-
-    .about_stats {
-        min-height: 17rem;
-        gap: 5rem;
-    }
-
-    .stats {
-        padding: 2rem 0;
-        width: 8rem;
-        height: 8rem;
-    }
-
-    .stats_number {
-        font-size: 2rem;
-    }
-
-    .stats_details {
-        font-size: 0.8rem;
-    }
-
-    .hanging_line {
-        height: 5rem;
-    }
-
-    .review_profile {
-        width: 70%;
-        padding-left: 9rem;
-    }
-
-    .review_profile:nth-child(2n) {
-        margin-left: auto;
-    }
-
-    .reviewer_image {
-        width: 8rem;
-        height: 8rem;
-        font-size: 2rem;
-    }
-
-    .reviewer_details {
-        left: 8rem;
-    }
-
-    .reviewer_name {
-        font-size: 0.9rem;
-    }
-
-    .reviewer_designation {
-        font-size: 0.7rem;
-    }
-
-    .review_text {
-        font-size: 1rem;
+    .pricing-grid {
+        grid-template-columns: repeat(3, 1fr);
     }
 }
 
-@media screen and (min-width: 1024px) {
-    .background_wave {
-        min-height: 38rem;
+@media (min-width: 1024px) {
+    .hero {
+        padding: 5rem 0 6rem;
     }
 
-    .intro_card {
-        margin: 0 1.875rem;
+    .hero-title {
+        font-size: 3.5rem;
     }
 
-    .intro_tag {
-        font-size: 3.2rem;
-    }
-
-    .intro_details {
-        font-size: 1.4rem;
-    }
-
-    .gap {
-        margin-top: -9rem;
-    }
-
-    .service_box {
-        margin: 0 1.875rem 1rem 1.875rem;
-    }
-
-    .services {
-        padding: 1.5rem;
-    }
-
-    .service_name {
-        font-size: 1.5rem;
-    }
-
-    .all_services {
-        padding: 3rem;
-        margin: 0 2rem;
-    }
-
-    .all_service_name {
-        font-size: 1.5rem;
-    }
-
-    .about_us {
-        margin: 0 1.875rem;
-    }
-
-    .about_stats {
-        gap: 10rem;
-    }
-
-    .stats {
-        width: 9rem;
-        height: 9rem;
-    }
-
-    .stats_number {
+    .stat-number {
         font-size: 2.5rem;
     }
 
-    .stats_details {
-        font-size: 1rem;
+    .services-grid {
+        grid-template-columns: repeat(3, 1fr);
     }
 
-    .review_wrapper {
-        margin: 0 1.875rem;
+    .reviews-grid {
+        grid-template-columns: repeat(3, 1fr);
     }
 
-    .review_profile {
-        width: 50%;
-        min-height: 5rem;
-    }
-
-    .price_card {
-        width: 320px;
+    .cta-content h2 {
+        font-size: 2.5rem;
     }
 }

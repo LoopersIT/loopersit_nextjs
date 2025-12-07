@@ -1,3 +1,4 @@
+import '@/styles/services.css';
 import '@/styles/homepage.css';
 
 interface Review {
@@ -29,37 +30,46 @@ export default async function ReviewsPage() {
     const reviews = await getReviews();
 
     return (
-        <div style={{ padding: '1rem', maxWidth: '1000px', margin: '0 auto' }}>
-            <div className="category_name">
-                <span className="first_cat">Client</span>
-                <span className="second_cat">Reviews</span>
-            </div>
+        <>
+            <section className="page-hero">
+                <div className="page-hero-content">
+                    <h1>Client Reviews</h1>
+                    <p>
+                        Real feedback from real clients. See what they have to say
+                        about working with us.
+                    </p>
+                </div>
+            </section>
 
-            <div className="review_wrapper" style={{ margin: '0' }}>
-                {reviews.map((review) => (
-                    <div key={review.id} className="review_profile">
-                        <div className="reviewer_image">
-                            {review.image ? (
-                                <img src={review.image} alt={review.name} style={{ width: '100%', height: '100%', borderRadius: '50%', objectFit: 'cover' }} />
-                            ) : (
-                                review.name.charAt(0).toUpperCase()
-                            )}
+            <div className="page-content">
+                <div className="reviews-grid" style={{ maxWidth: '1000px', margin: '0 auto' }}>
+                    {reviews.map((review) => (
+                        <div key={review.id} className="review-card">
+                            <p className="review-text">{review.review}</p>
+                            <div className="review-author">
+                                <div className="review-avatar">
+                                    {review.image ? (
+                                        <img src={review.image} alt={review.name} />
+                                    ) : (
+                                        review.name.charAt(0)
+                                    )}
+                                </div>
+                                <div className="review-info">
+                                    <h4>{review.name}</h4>
+                                    <p>{review.designation}</p>
+                                </div>
+                            </div>
                         </div>
-                        <div className="reviewer_details">
-                            <p className="reviewer_name">{review.name}</p>
-                            <p className="reviewer_designation">{review.designation}</p>
-                        </div>
-                        <div className="review_text">{review.review}</div>
-                    </div>
-                ))}
+                    ))}
+                </div>
 
                 {reviews.length === 0 && (
-                    <div style={{ textAlign: 'center', padding: '4rem 2rem', color: '#6b7280' }}>
-                        <i className="bi bi-chat-quote" style={{ fontSize: '3rem', marginBottom: '1rem', display: 'block' }}></i>
-                        <p>No reviews yet.</p>
+                    <div style={{ textAlign: 'center', padding: '4rem 2rem' }}>
+                        <i className="bi bi-chat-quote" style={{ fontSize: '3rem', color: 'var(--text-muted)', marginBottom: '1rem', display: 'block' }}></i>
+                        <p style={{ color: 'var(--text-light)' }}>No reviews yet.</p>
                     </div>
                 )}
             </div>
-        </div>
+        </>
     );
 }

@@ -1,3 +1,4 @@
+import '@/styles/services.css';
 import '@/styles/portfolio.css';
 
 interface Portfolio {
@@ -30,42 +31,50 @@ export default async function PortfolioPage() {
     const projects = await getPortfolio();
 
     return (
-        <div className="portfolio-container">
-            <div className="category_name">
-                <span className="first_cat">Our</span>
-                <span className="second_cat">Portfolio</span>
-            </div>
-
-            <div className="portfolio-grid">
-                {projects.map((project) => (
-                    <div key={project.id} className="portfolio-card">
-                        {project.image ? (
-                            <img className="portfolio-image" src={project.image} alt={project.title} />
-                        ) : (
-                            <div className="portfolio-image">
-                                <i className="bi bi-folder"></i>
-                            </div>
-                        )}
-                        <div className="portfolio-content">
-                            <h2 className="portfolio-title">{project.title}</h2>
-                            <span className="portfolio-duration">{project.duration}</span>
-                            <p className="portfolio-detail">{project.detail}</p>
-                            {project.link && (
-                                <a href={project.link} target="_blank" rel="noopener noreferrer" className="portfolio-link">
-                                    <i className="bi bi-box-arrow-up-right"></i> Visit Project
-                                </a>
-                            )}
-                        </div>
-                    </div>
-                ))}
-            </div>
-
-            {projects.length === 0 && (
-                <div style={{ textAlign: 'center', padding: '4rem 2rem', color: '#6b7280' }}>
-                    <i className="bi bi-folder" style={{ fontSize: '3rem', marginBottom: '1rem', display: 'block' }}></i>
-                    <p>No portfolio items yet.</p>
+        <>
+            <section className="page-hero">
+                <div className="page-hero-content">
+                    <h1>Our Portfolio</h1>
+                    <p>
+                        Explore our recent work and see how we&apos;ve helped businesses
+                        achieve their digital goals.
+                    </p>
                 </div>
-            )}
-        </div>
+            </section>
+
+            <div className="page-content">
+                <div className="portfolio-grid">
+                    {projects.map((project) => (
+                        <div key={project.id} className="portfolio-card">
+                            <div className="portfolio-card-image">
+                                {project.image ? (
+                                    <img src={project.image} alt={project.title} />
+                                ) : (
+                                    <i className="bi bi-folder"></i>
+                                )}
+                            </div>
+                            <div className="portfolio-card-content">
+                                <h3>{project.title}</h3>
+                                <span className="portfolio-card-duration">{project.duration}</span>
+                                <p>{project.detail}</p>
+                                {project.link && (
+                                    <a href={project.link} target="_blank" rel="noopener noreferrer" className="portfolio-card-link">
+                                        <i className="bi bi-box-arrow-up-right"></i>
+                                        View Project
+                                    </a>
+                                )}
+                            </div>
+                        </div>
+                    ))}
+                </div>
+
+                {projects.length === 0 && (
+                    <div style={{ textAlign: 'center', padding: '4rem 2rem' }}>
+                        <i className="bi bi-folder" style={{ fontSize: '3rem', color: 'var(--text-muted)', marginBottom: '1rem', display: 'block' }}></i>
+                        <p style={{ color: 'var(--text-light)' }}>No portfolio items yet.</p>
+                    </div>
+                )}
+            </div>
+        </>
     );
 }

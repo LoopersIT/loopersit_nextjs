@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import '@/styles/services.css';
 import '@/styles/homepage.css';
 
 interface PriceFeature {
@@ -34,74 +35,66 @@ export default async function PricingPage() {
     const pricing = await getPricing();
 
     return (
-        <div style={{ padding: '1rem', maxWidth: '1200px', margin: '0 auto' }}>
-            <div className="category_name">
-                <span className="first_cat">Our</span>
-                <span className="second_cat">Pricing</span>
-            </div>
+        <>
+            <section className="page-hero">
+                <div className="page-hero-content">
+                    <h1>Pricing Plans</h1>
+                    <p>
+                        Simple, transparent pricing that scales with your business.
+                        No hidden fees, no surprises.
+                    </p>
+                </div>
+            </section>
 
-            <p style={{ textAlign: 'center', color: '#6b7280', marginBottom: '2rem', fontSize: '1.1rem' }}>
-                Flexible pricing plans tailored to your needs. All plans include dedicated support.
-            </p>
+            <div className="page-content">
+                <div className="pricing-grid">
+                    {pricing.map((plan, index) => (
+                        <div key={plan.id} className={`pricing-card ${index === 1 ? 'featured' : ''}`}>
+                            {index === 1 && <span className="pricing-badge">Most Popular</span>}
+                            <h3>{plan.name}</h3>
+                            <div className="pricing-price">{plan.priceRange}</div>
+                            <ul className="pricing-features">
+                                {plan.features?.map((feature) => (
+                                    <li key={feature.id}>
+                                        <i className="bi bi-check-circle-fill"></i>
+                                        {feature.feature}
+                                    </li>
+                                ))}
+                            </ul>
+                            <Link
+                                href="/contact"
+                                className={`btn ${index === 1 ? 'btn-secondary' : 'btn-outline'}`}
+                                style={{ width: '100%' }}
+                            >
+                                Get Started
+                            </Link>
+                        </div>
+                    ))}
+                </div>
 
-            <div className="estimated_price">
-                {pricing.map((plan, index) => (
-                    <div
-                        key={plan.id}
-                        className="price_card"
-                        style={{
-                            transform: index === 1 ? 'scale(1.05)' : 'none',
-                            border: index === 1 ? '2px solid #23ADAD' : 'none'
-                        }}
-                    >
-                        {index === 1 && (
-                            <div style={{
-                                background: '#23ADAD',
-                                color: '#fff',
-                                textAlign: 'center',
-                                padding: '0.5rem',
-                                borderRadius: '10px',
-                                fontSize: '0.8rem',
-                                marginBottom: '1rem'
-                            }}>
-                                MOST POPULAR
-                            </div>
-                        )}
-                        <div className="service_desc">
-                            <span className="product_name">{plan.name}</span>
-                            <span className="service_price">{plan.priceRange}</span>
-                        </div>
-                        <div className="offer_list">
-                            {plan.features?.map((feature) => (
-                                <div key={feature.id} className="offer_details">
-                                    <span className="check_icons"><i className="bi bi-check2-circle"></i></span>
-                                    <span className="offer_desc">{feature.feature}</span>
-                                </div>
-                            ))}
-                        </div>
-                        <div className="price_button">
-                            <Link href="/contact" className="btn-secondary">Get Started</Link>
+                {pricing.length === 0 && (
+                    <div style={{ textAlign: 'center', padding: '4rem 2rem' }}>
+                        <i className="bi bi-currency-dollar" style={{ fontSize: '3rem', color: 'var(--text-muted)', marginBottom: '1rem', display: 'block' }}></i>
+                        <p style={{ color: 'var(--text-light)' }}>Pricing information coming soon.</p>
+                    </div>
+                )}
+
+                {/* Custom Quote Section */}
+                <div className="cta-section" style={{ paddingBottom: 0 }}>
+                    <div className="cta-box">
+                        <div className="cta-content">
+                            <h2>Need a Custom Quote?</h2>
+                            <p>
+                                Every project is unique. Contact us for a personalized
+                                quote tailored to your specific requirements.
+                            </p>
+                            <Link href="/contact" className="btn btn-white">
+                                Request Custom Quote
+                            </Link>
                         </div>
                     </div>
-                ))}
-            </div>
-
-            {pricing.length === 0 && (
-                <div style={{ textAlign: 'center', padding: '4rem 2rem', color: '#6b7280' }}>
-                    <i className="bi bi-currency-dollar" style={{ fontSize: '3rem', marginBottom: '1rem', display: 'block' }}></i>
-                    <p>Pricing information coming soon.</p>
                 </div>
-            )}
-
-            <div style={{ background: '#fff', borderRadius: '15px', padding: '2rem', marginTop: '3rem', textAlign: 'center' }}>
-                <h2 style={{ color: '#2A1D51', marginBottom: '1rem' }}>Need a Custom Quote?</h2>
-                <p style={{ color: '#6b7280', marginBottom: '1.5rem' }}>
-                    Every project is unique. Contact us for a personalized quote tailored to your specific requirements.
-                </p>
-                <Link href="/contact" className="btn-primary" style={{ padding: '1rem 2rem' }}>
-                    Request Custom Quote
-                </Link>
             </div>
-        </div>
+        </>
     );
 }

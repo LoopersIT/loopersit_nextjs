@@ -2,29 +2,25 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import '@/styles/navbar.css';
 
 const navLinks = [
     { name: 'Services', href: '/services' },
     { name: 'Portfolio', href: '/portfolio' },
-    { name: 'Reviews', href: '/reviews' },
+    { name: 'About', href: '/about' },
     { name: 'Pricing', href: '/pricing' },
-    { name: 'Contact us', href: '/contact' },
-    { name: 'About us', href: '/about' },
+    { name: 'FAQ', href: '/faq' },
 ];
 
-// LoopersIT Logo SVG Component
 function Logo() {
     return (
-        <svg className="logoIcon" xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
-            <rect width="25.7234" height="25.7234" rx="10" fill="#2A1D51" />
-            <rect x="7.71704" y="13.8789" width="5.0747" height="5.0747" transform="rotate(-45 7.71704 13.8789)" fill="#23ADAD" />
-            <rect x="13.8906" y="15.9355" width="5.0747" height="5.0747" transform="rotate(-45 13.8906 15.9355)" fill="white" />
-            <rect x="11.8328" y="9.76172" width="5.0747" height="5.0747" transform="rotate(-45 11.8328 9.76172)" fill="#23ADAD" />
-            <rect x="3.60132" y="9.76172" width="5.0747" height="5.0747" transform="rotate(-45 3.60132 9.76172)" fill="white" />
-            <circle cx="12.6045" cy="13.1193" r="11.59" stroke="white" />
-            <path d="M19.7482 22.6317L18.1074 24.97L18.3652 23.3874L16.8941 22.7495L19.7482 22.6317Z" fill="white" />
+        <svg className="logo-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="40" height="40" rx="12" fill="#2A1D51" />
+            <rect x="12" y="22" width="8" height="8" transform="rotate(-45 12 22)" fill="#23ADAD" />
+            <rect x="22" y="25" width="8" height="8" transform="rotate(-45 22 25)" fill="white" />
+            <rect x="18.5" y="15" width="8" height="8" transform="rotate(-45 18.5 15)" fill="#23ADAD" />
+            <rect x="5.5" y="15" width="8" height="8" transform="rotate(-45 5.5 15)" fill="white" />
         </svg>
     );
 }
@@ -32,40 +28,92 @@ function Logo() {
 export default function Navbar() {
     const pathname = usePathname();
     const [menuOpen, setMenuOpen] = useState(false);
+    const [scrolled, setScrolled] = useState(false);
 
-    const toggleMenu = () => setMenuOpen(!menuOpen);
+    useEffect(() => {
+        const handleScroll = () => setScrolled(window.scrollY > 10);
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
+
+    useEffect(() => {
+        if (menuOpen) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = '';
+        }
+    }, [menuOpen]);
+
+    const closeMenu = () => setMenuOpen(false);
 
     return (
-        <nav className="navbar">
-            <Link className="logoLink" href="/">
-                <div className="svgIcon">
-                    <Logo />
-                </div>
-                <div className="logoLetter">
-                    <span className="logoLetter_first">Loopers</span>
-                    <span className="logoLetter_second">IT</span>
-                </div>
-            </Link>
+        <>
+            <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
+                <div className="navbar-container">
+                    <Link className="logo" href="/" onClick={closeMenu}>
+                        <Logo />
+                        <span className="logo-text">
+                            <span className="logo-text-primary">Loopers</span>
+                            <span className="logo-text-secondary">IT</span>
+                        </span>
+                    </Link>
 
-            <div className="navItems">
-                <li className="nav_lists">
-                    <button className="navItemsMenu_link" onClick={toggleMenu}>
-                        <i className={`bi ${menuOpen ? 'bi-x' : 'bi-list'}`}></i>
-                    </button>
-                    <div className={`menu_list ${menuOpen ? '' : 'hide_nav'}`}>
+                    {/* Desktop Navigation */}
+                    <ul className="nav-links">
                         {navLinks.map((link) => (
+                            <li key={link.href}>
+                                <Link
+                                    className={`nav-link ${pathname === link.href ? 'active' : ''}`}
+                                    href={link.href}
+                                >
+                                    {link.name}
+                                </Link>
+                            </li>
+                        ))}
+                    </ul>
+
+                    <div className="nav-cta">
+                        <Link href="/contact" className="btn btn-primary">
+                            Contact Us
+                        </Link>
+                    </div>
+
+                    {/* Hamburger Button */}
+                    <button
+                        className={`menu-toggle ${menuOpen ? 'active' : ''}`}
+                        onClick={() => setMenuOpen(!menuOpen)}
+                        aria-label="Toggle menu"
+                    >
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
+            </nav>
+
+            {/* Mobile Menu */}
+            <div className={`mobile-menu ${menuOpen ? 'open' : ''}`}>
+                <ul className="mobile-nav-links">
+                    {navLinks.map((link) => (
+                        <li key={link.href}>
                             <Link
-                                key={link.href}
-                                className={`nav_items_link ${pathname === link.href ? 'active' : ''}`}
+                                className={`mobile-nav-link ${pathname === link.href ? 'active' : ''}`}
                                 href={link.href}
-                                onClick={() => setMenuOpen(false)}
+                                onClick={closeMenu}
                             >
                                 {link.name}
                             </Link>
-                        ))}
-                    </div>
-                </li>
+                        </li>
+                    ))}
+                </ul>
+                <div className="mobile-cta">
+                    <Link href="/contact" className="btn btn-primary" onClick={closeMenu}>
+                        Contact Us
+                    </Link>
+                </div>
             </div>
-        </nav>
+
+            <div className="navbar-spacer"></div>
+        </>
     );
 }

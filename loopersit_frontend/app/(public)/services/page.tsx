@@ -36,52 +36,61 @@ export default async function ServicesPage() {
     const services = await getServices();
 
     return (
-        <div className="service-container">
-            <div className="category_name">
-                <span className="first_cat">Our</span>
-                <span className="second_cat">Services</span>
-            </div>
+        <>
+            <section className="page-hero">
+                <div className="page-hero-content">
+                    <h1>Our Services</h1>
+                    <p>
+                        Comprehensive digital solutions tailored to help your business
+                        succeed in the modern digital landscape.
+                    </p>
+                </div>
+            </section>
 
-            <div className="service-categories">
-                {services.map((service) => (
-                    <div key={service.id} className="service">
-                        <div className="service-intro">
-                            {service.image ? (
-                                <img className="service-image" src={service.image} alt={service.name} />
-                            ) : (
-                                <div className="service-image" style={{ background: 'linear-gradient(135deg, #23ADAD, #2A1D51)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                                    <i className="bi bi-briefcase" style={{ fontSize: '3rem', color: '#fff' }}></i>
-                                </div>
-                            )}
-                            <h1 className="service-title">{service.name}</h1>
-                            <p className="service-short-description">{service.description}</p>
-                        </div>
-                        <div className="service-offer">
-                            <h2 className="offer-title">What we offer</h2>
-                            <ul className="offer-list">
-                                {service.offers?.slice(0, 5).map((offer) => (
-                                    <li key={offer.id} className="offer-list-item">
-                                        <span className="offer-bullet"></span>
-                                        {offer.offer}
-                                    </li>
-                                ))}
-                            </ul>
-                            <div className="btn-container">
-                                <Link href={`/services/${service.slug}`} className="service-explore-btn">
-                                    Explore Options
+            <div className="page-content">
+                <div className="service-list">
+                    {services.map((service) => (
+                        <div key={service.id} className="service-item">
+                            <div className="service-item-image">
+                                {service.image ? (
+                                    <img src={service.image} alt={service.name} />
+                                ) : (
+                                    <i className="bi bi-code-slash"></i>
+                                )}
+                            </div>
+                            <div className="service-item-content">
+                                <h2>{service.name}</h2>
+                                <p>{service.description}</p>
+
+                                {service.offers?.length > 0 && (
+                                    <div className="service-offers">
+                                        <h3>What we offer:</h3>
+                                        <ul>
+                                            {service.offers.slice(0, 4).map((offer) => (
+                                                <li key={offer.id}>
+                                                    <i className="bi bi-check2"></i>
+                                                    {offer.offer}
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </div>
+                                )}
+
+                                <Link href={`/services/${service.slug}`} className="btn btn-primary">
+                                    Learn More →
                                 </Link>
                             </div>
                         </div>
-                    </div>
-                ))}
-            </div>
-
-            {services.length === 0 && (
-                <div style={{ textAlign: 'center', padding: '4rem 2rem', color: '#6b7280' }}>
-                    <i className="bi bi-briefcase" style={{ fontSize: '3rem', marginBottom: '1rem', display: 'block' }}></i>
-                    <p>No services available yet.</p>
+                    ))}
                 </div>
-            )}
-        </div>
+
+                {services.length === 0 && (
+                    <div style={{ textAlign: 'center', padding: '4rem 2rem' }}>
+                        <i className="bi bi-briefcase" style={{ fontSize: '3rem', color: 'var(--text-muted)', marginBottom: '1rem', display: 'block' }}></i>
+                        <p style={{ color: 'var(--text-light)' }}>No services available yet.</p>
+                    </div>
+                )}
+            </div>
+        </>
     );
 }

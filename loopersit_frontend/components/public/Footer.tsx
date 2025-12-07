@@ -7,17 +7,14 @@ interface Page {
     slug: string;
 }
 
-// LoopersIT Logo SVG Component
-function Logo() {
+function FooterLogo() {
     return (
-        <svg className="footer_logoIcon" xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
-            <rect width="25.7234" height="25.7234" rx="10" fill="#2A1D51" />
-            <rect x="7.71704" y="13.8789" width="5.0747" height="5.0747" transform="rotate(-45 7.71704 13.8789)" fill="#23ADAD" />
-            <rect x="13.8906" y="15.9355" width="5.0747" height="5.0747" transform="rotate(-45 13.8906 15.9355)" fill="white" />
-            <rect x="11.8328" y="9.76172" width="5.0747" height="5.0747" transform="rotate(-45 11.8328 9.76172)" fill="#23ADAD" />
-            <rect x="3.60132" y="9.76172" width="5.0747" height="5.0747" transform="rotate(-45 3.60132 9.76172)" fill="white" />
-            <circle cx="12.6045" cy="13.1193" r="11.59" stroke="white" />
-            <path d="M19.7482 22.6317L18.1074 24.97L18.3652 23.3874L16.8941 22.7495L19.7482 22.6317Z" fill="white" />
+        <svg className="footer-logo-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="40" height="40" rx="12" fill="#3d2f6b" />
+            <rect x="12" y="22" width="8" height="8" transform="rotate(-45 12 22)" fill="#23ADAD" />
+            <rect x="22" y="25" width="8" height="8" transform="rotate(-45 22 25)" fill="white" />
+            <rect x="18.5" y="15" width="8" height="8" transform="rotate(-45 18.5 15)" fill="#23ADAD" />
+            <rect x="5.5" y="15" width="8" height="8" transform="rotate(-45 5.5 15)" fill="white" />
         </svg>
     );
 }
@@ -39,79 +36,87 @@ export default async function Footer() {
     const extraPages = await getFooterPages();
 
     return (
-        <div className="footer_background">
-            <span className="brand_slogan">Your brand, our efforts</span>
+        <footer className="footer">
+            <div className="footer-container">
+                <div className="footer-grid">
+                    {/* Brand */}
+                    <div className="footer-brand">
+                        <div className="footer-logo">
+                            <FooterLogo />
+                            <span className="footer-logo-text">Loopers<span>IT</span></span>
+                        </div>
+                        <p className="footer-tagline">Your brand, our efforts</p>
+                        <p className="footer-description">
+                            We create responsive, custom websites and implement digital marketing strategies to drive business growth online.
+                        </p>
+                        <div className="footer-social">
+                            <a href="https://facebook.com/loopersit" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+                                <i className="bi bi-facebook"></i>
+                            </a>
+                            <a href="https://linkedin.com/company/loopersit" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                                <i className="bi bi-linkedin"></i>
+                            </a>
+                            <a href="https://twitter.com/loopersit" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
+                                <i className="bi bi-twitter-x"></i>
+                            </a>
+                            <a href="https://youtube.com/@loopersit" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+                                <i className="bi bi-youtube"></i>
+                            </a>
+                        </div>
+                    </div>
 
-            <ul className="footer_icon">
-                <li className="footer_icon_list">
-                    <a className="footer_icon_link" href="https://facebook.com/loopersit" target="_blank" rel="noopener noreferrer">
-                        <i className="bi bi-facebook"></i>
-                    </a>
-                </li>
-                <li className="footer_icon_list">
-                    <a className="footer_icon_link" href="https://www.linkedin.com/company/loopersit/" target="_blank" rel="noopener noreferrer">
-                        <i className="bi bi-linkedin"></i>
-                    </a>
-                </li>
-                <li className="footer_icon_list">
-                    <a className="footer_icon_link" href="https://x.com/loopersit" target="_blank" rel="noopener noreferrer">
-                        <i className="bi bi-twitter"></i>
-                    </a>
-                </li>
-                <li className="footer_icon_list">
-                    <a className="footer_icon_link" href="https://youtube.com/@loopersit" target="_blank" rel="noopener noreferrer">
-                        <i className="bi bi-youtube"></i>
-                    </a>
-                </li>
-            </ul>
+                    {/* Quick Links */}
+                    <div className="footer-links-section">
+                        <h4>Quick Links</h4>
+                        <ul className="footer-links">
+                            <li><Link href="/">Home</Link></li>
+                            <li><Link href="/services">Services</Link></li>
+                            <li><Link href="/portfolio">Portfolio</Link></li>
+                            <li><Link href="/about">About Us</Link></li>
+                            <li><Link href="/contact">Contact</Link></li>
+                        </ul>
+                    </div>
 
-            <ul className="footer_nav_items">
-                <li className="footer_nav_items_list">
-                    <Link className="footer_nav_items_link" href="/">Home</Link>
-                </li>
-                <li className="footer_nav_items_list">
-                    <Link className="footer_nav_items_link" href="/about">About</Link>
-                </li>
-                <li className="footer_nav_items_list">
-                    <Link className="footer_nav_items_link" href="/services">Services</Link>
-                </li>
-                <li className="footer_nav_items_list">
-                    <Link className="footer_nav_items_link" href="/contact">Contact us</Link>
-                </li>
-                <li className="footer_nav_items_list">
-                    <Link className="footer_nav_items_link" href="/portfolio">Portfolio</Link>
-                </li>
-            </ul>
+                    {/* Services */}
+                    <div className="footer-links-section">
+                        <h4>Services</h4>
+                        <ul className="footer-links">
+                            <li><Link href="/services">Web Development</Link></li>
+                            <li><Link href="/services">Mobile Apps</Link></li>
+                            <li><Link href="/services">UI/UX Design</Link></li>
+                            <li><Link href="/pricing">Pricing</Link></li>
+                            <li><Link href="/faq">FAQ</Link></li>
+                        </ul>
+                    </div>
 
-            {extraPages.length > 0 && (
-                <ul className="footer_nav_items">
-                    {extraPages.map((page) => (
-                        <li key={page.id} className="footer_nav_items_list">
-                            <Link className="footer_nav_items_link" href={`/page/${page.slug}`}>
+                    {/* Contact */}
+                    <div className="footer-links-section">
+                        <h4>Contact</h4>
+                        <div className="footer-contact-item">
+                            <i className="bi bi-geo-alt"></i>
+                            <span>Mirpur, Dhaka-1100<br />Bangladesh</span>
+                        </div>
+                        <div className="footer-contact-item">
+                            <i className="bi bi-envelope"></i>
+                            <a href="mailto:support@loopersit.com">support@loopersit.com</a>
+                        </div>
+                    </div>
+                </div>
+
+                {/* Bottom */}
+                <div className="footer-bottom">
+                    <p className="footer-copyright">
+                        © {new Date().getFullYear()} LoopersIT. All rights reserved.
+                    </p>
+                    <div className="footer-bottom-links">
+                        {extraPages.map((page) => (
+                            <Link key={page.id} href={`/page/${page.slug}`}>
                                 {page.title}
                             </Link>
-                        </li>
-                    ))}
-                </ul>
-            )}
-
-            <div className="footer_end">
-                <Link className="footer_logoLink" href="/">
-                    <div className="footer_svgIcon">
-                        <Logo />
+                        ))}
                     </div>
-                    <div className="footer_logoLetter">
-                        <span className="footer_logoLetter_first">Loopers</span>
-                        <span className="footer_logoLetter_second">IT</span>
-                    </div>
-                </Link>
-                <span className="credit">Developed by LoopersIT</span>
-                <span className="location">
-                    Mirpur, Dhaka-1100, Bangladesh
-                    <br />
-                    <a className="loopers_mail" href="mailto:support@loopersit.com">support@loopersit.com</a>
-                </span>
+                </div>
             </div>
-        </div>
+        </footer>
     );
 }
