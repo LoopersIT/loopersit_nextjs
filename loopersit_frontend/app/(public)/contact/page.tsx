@@ -1,6 +1,8 @@
 'use client';
 
 import { useState } from 'react';
+import { FaMapMarkerAlt, FaEnvelope, FaClock, FaFacebookF, FaLinkedinIn, FaCheckCircle, FaPaperPlane } from 'react-icons/fa';
+import { FaXTwitter } from 'react-icons/fa6';
 import '@/styles/services.css';
 import '@/styles/contact.css';
 
@@ -44,7 +46,7 @@ export default function ContactPage() {
 
                         <div className="contact-item">
                             <div className="contact-item-icon">
-                                <i className="bi bi-geo-alt"></i>
+                                <FaMapMarkerAlt />
                             </div>
                             <div className="contact-item-content">
                                 <h4>Address</h4>
@@ -54,7 +56,7 @@ export default function ContactPage() {
 
                         <div className="contact-item">
                             <div className="contact-item-icon">
-                                <i className="bi bi-envelope"></i>
+                                <FaEnvelope />
                             </div>
                             <div className="contact-item-content">
                                 <h4>Email</h4>
@@ -64,7 +66,7 @@ export default function ContactPage() {
 
                         <div className="contact-item">
                             <div className="contact-item-icon">
-                                <i className="bi bi-clock"></i>
+                                <FaClock />
                             </div>
                             <div className="contact-item-content">
                                 <h4>Working Hours</h4>
@@ -74,13 +76,13 @@ export default function ContactPage() {
 
                         <div className="contact-social">
                             <a href="https://facebook.com/loopersit" target="_blank" rel="noopener noreferrer">
-                                <i className="bi bi-facebook"></i>
+                                <FaFacebookF />
                             </a>
                             <a href="https://linkedin.com/company/loopersit" target="_blank" rel="noopener noreferrer">
-                                <i className="bi bi-linkedin"></i>
+                                <FaLinkedinIn />
                             </a>
                             <a href="https://twitter.com/loopersit" target="_blank" rel="noopener noreferrer">
-                                <i className="bi bi-twitter-x"></i>
+                                <FaXTwitter />
                             </a>
                         </div>
                     </div>
@@ -139,12 +141,18 @@ export default function ContactPage() {
                             </div>
 
                             <button type="submit" className="btn btn-primary form-submit" disabled={status === 'sending'}>
-                                {status === 'sending' ? 'Sending...' : 'Send Message'}
+                                {status === 'sending' ? (
+                                    'Sending...'
+                                ) : (
+                                    <>
+                                        <FaPaperPlane style={{ marginRight: '0.5rem' }} /> Send Message
+                                    </>
+                                )}
                             </button>
 
                             {status === 'success' && (
                                 <div className="form-success">
-                                    <i className="bi bi-check-circle"></i> Thank you! We&apos;ll get back to you soon.
+                                    <FaCheckCircle /> Thank you! We&apos;ll get back to you soon.
                                 </div>
                             )}
                         </form>

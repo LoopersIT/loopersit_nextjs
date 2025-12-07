@@ -38,9 +38,6 @@
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
-}
-
-.contact-item-icon i {
     font-size: 1.2rem;
     color: var(--secondary);
 }
@@ -116,11 +113,18 @@
 }
 
 .form-group label {
-    display: block;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
     font-size: 0.9rem;
     font-weight: 500;
     color: var(--text);
     margin-bottom: 0.5rem;
+}
+
+.form-label-icon {
+    color: var(--secondary);
+    font-size: 0.85rem;
 }
 
 .form-group input,
