@@ -18,11 +18,30 @@ export default function ContactPage() {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setStatus('sending');
-        await new Promise(resolve => setTimeout(resolve, 1500));
-        console.log('Form submitted:', formData);
-        setStatus('success');
-        setFormData({ name: '', email: '', subject: '', message: '' });
-        setTimeout(() => setStatus('idle'), 4000);
+
+        try {
+            const res = await fetch('/api/contact', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formData),
+            });
+
+            const data = await res.json();
+
+            if (res.ok) {
+                setStatus('success');
+                setFormData({ name: '', email: '', subject: '', message: '' });
+                setTimeout(() => setStatus('idle'), 5000);
+            } else {
+                console.error('Submission error:', data);
+                setStatus('error');
+                setTimeout(() => setStatus('idle'), 4000);
+            }
+        } catch (error) {
+            console.error('Network error:', error);
+            setStatus('error');
+            setTimeout(() => setStatus('idle'), 4000);
+        }
     };
 
     return (
@@ -153,6 +172,12 @@ export default function ContactPage() {
                             {status === 'success' && (
                                 <div className="form-success">
                                     <FaCheckCircle /> Thank you! We&apos;ll get back to you soon.
+                                </div>
+                            )}
+
+                            {status === 'error' && (
+                                <div className="form-error" style={{ textAlign: 'center', marginTop: '1rem', color: '#ef4444', padding: '1rem', background: '#fee2e2', borderRadius: 'var(--radius)' }}>
+                                    Something went wrong. Please try again.
                                 </div>
                             )}
                         </form>
