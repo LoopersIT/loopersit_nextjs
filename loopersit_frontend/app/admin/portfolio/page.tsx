@@ -28,9 +28,10 @@ export default function PortfolioPage() {
         try {
             const res = await fetch('/api/portfolio');
             const data = await res.json();
-            setPortfolios(data);
+            setPortfolios(Array.isArray(data) ? data : []);
         } catch (error) {
             console.error('Error fetching portfolios:', error);
+            setPortfolios([]);
         } finally {
             setLoading(false);
         }

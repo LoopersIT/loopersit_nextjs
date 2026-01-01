@@ -19,10 +19,13 @@ export default function FAQPage() {
         fetch('/api/faqs')
             .then(res => res.json())
             .then(data => {
-                setFaqs(data);
+                setFaqs(Array.isArray(data) ? data : []);
                 setLoading(false);
             })
-            .catch(() => setLoading(false));
+            .catch(() => {
+                setFaqs([]);
+                setLoading(false);
+            });
     }, []);
 
     if (loading) {

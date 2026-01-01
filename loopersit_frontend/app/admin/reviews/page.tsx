@@ -34,9 +34,10 @@ export default function ReviewsPage() {
         try {
             const response = await fetch('/api/reviews');
             const data = await response.json();
-            setReviews(data);
+            setReviews(Array.isArray(data) ? data : []);
         } catch (error) {
             console.error('Error fetching reviews:', error);
+            setReviews([]);
         } finally {
             setLoading(false);
         }

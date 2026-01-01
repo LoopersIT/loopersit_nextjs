@@ -15,7 +15,8 @@ async function getReviews(): Promise<Review[]> {
     try {
         const res = await fetch(`${API_URL}/api/reviews`, { cache: 'no-store' });
         if (!res.ok) return [];
-        return res.json();
+        const data = await res.json();
+        return Array.isArray(data) ? data : [];
     } catch {
         return [];
     }

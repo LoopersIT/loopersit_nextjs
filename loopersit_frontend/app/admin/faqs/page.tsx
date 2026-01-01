@@ -24,9 +24,10 @@ export default function FAQsPage() {
         try {
             const res = await fetch('/api/faqs');
             const data = await res.json();
-            setFaqs(data);
+            setFaqs(Array.isArray(data) ? data : []);
         } catch (error) {
             console.error('Error fetching FAQs:', error);
+            setFaqs([]);
         } finally {
             setLoading(false);
         }

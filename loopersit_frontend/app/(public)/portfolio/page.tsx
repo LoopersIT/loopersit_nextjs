@@ -17,7 +17,8 @@ async function getPortfolio(): Promise<Portfolio[]> {
     try {
         const res = await fetch(`${API_URL}/api/portfolio`, { cache: 'no-store' });
         if (!res.ok) return [];
-        return res.json();
+        const data = await res.json();
+        return Array.isArray(data) ? data : [];
     } catch {
         return [];
     }

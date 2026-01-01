@@ -23,7 +23,8 @@ async function getServices(): Promise<Service[]> {
     try {
         const res = await fetch(`${API_URL}/api/services`, { cache: 'no-store' });
         if (!res.ok) return [];
-        return res.json();
+        const data = await res.json();
+        return Array.isArray(data) ? data : [];
     } catch {
         return [];
     }

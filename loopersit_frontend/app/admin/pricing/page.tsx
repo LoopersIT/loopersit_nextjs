@@ -31,9 +31,11 @@ export default function PricingPage() {
         try {
             const response = await fetch('/api/pricing');
             const data = await response.json();
-            setPricingPlans(data);
+            // Ensure data is an array before setting state
+            setPricingPlans(Array.isArray(data) ? data : []);
         } catch (error) {
             console.error('Error fetching pricing:', error);
+            setPricingPlans([]);
         } finally {
             setLoading(false);
         }

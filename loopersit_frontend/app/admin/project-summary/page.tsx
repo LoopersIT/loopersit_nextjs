@@ -24,9 +24,10 @@ export default function ProjectSummaryPage() {
         try {
             const res = await fetch('/api/project-summary');
             const data = await res.json();
-            setSummaries(data);
+            setSummaries(Array.isArray(data) ? data : []);
         } catch (error) {
             console.error('Error fetching project summaries:', error);
+            setSummaries([]);
         } finally {
             setLoading(false);
         }

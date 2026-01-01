@@ -28,9 +28,10 @@ export default function ServicesPage() {
         try {
             const response = await fetch('/api/services');
             const data = await response.json();
-            setServices(data);
+            setServices(Array.isArray(data) ? data : []);
         } catch (error) {
             console.error('Error fetching services:', error);
+            setServices([]);
         } finally {
             setLoading(false);
         }

@@ -24,9 +24,10 @@ export default function PagesManagementPage() {
         try {
             const response = await fetch('/api/pages');
             const data = await response.json();
-            setPages(data);
+            setPages(Array.isArray(data) ? data : []);
         } catch (error) {
             console.error('Error fetching pages:', error);
+            setPages([]);
         } finally {
             setLoading(false);
         }

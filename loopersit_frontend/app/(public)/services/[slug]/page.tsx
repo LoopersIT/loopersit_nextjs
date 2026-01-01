@@ -34,6 +34,7 @@ async function getService(slug: string): Promise<Service | null> {
         const res = await fetch(`${API_URL}/api/services`, { cache: 'no-store' });
         if (!res.ok) return null;
         const services = await res.json();
+        if (!Array.isArray(services)) return null;
         return services.find((s: Service) => s.slug === slug) || null;
     } catch {
         return null;
