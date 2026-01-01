@@ -9,7 +9,13 @@ import Link from 'next/link';
 export default function NewServicePage() {
     const router = useRouter();
     const [loading, setLoading] = useState(false);
-    const [formData, setFormData] = useState({
+    const [formData, setFormData] = useState<{
+        name: string;
+        description: string;
+        image: string;
+        homeIcon: string;
+        order: number | string;
+    }>({
         name: '',
         description: '',
         image: '',
@@ -31,11 +37,13 @@ export default function NewServicePage() {
             if (response.ok) {
                 router.push('/admin/services');
             } else {
-                alert('Failed to create service');
+                const data = await response.json().catch(() => ({}));
+                const errorMsg = data.error || 'Failed to create service';
+                alert(errorMsg + (response.status === 401 ? '. Please log in again.' : ''));
             }
         } catch (error) {
             console.error('Error creating service:', error);
-            alert('Failed to create service');
+            alert('Network error. Please check your connection and try again.');
         } finally {
             setLoading(false);
         }
@@ -104,8 +112,14 @@ export default function NewServicePage() {
                         </label>
                         <input
                             type="number"
-                            value={formData.order}
-                            onChange={(e) => setFormData({ ...formData, order: parseInt(e.target.value) })}
+                            value={formData.order || ''}
+                            onChange={(e) => setFormData({ ...formData, order: e.target.value === '' ? '' : Number(e.target.value) })}
+                            onBlur={(e) => {
+                                const num = Number(e.target.value);
+                                if (!e.target.value || isNaN(num) || num < 1) {
+                                    setFormData({ ...formData, order: 1 });
+                                }
+                            }}
                             min="1"
                             className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
                         />

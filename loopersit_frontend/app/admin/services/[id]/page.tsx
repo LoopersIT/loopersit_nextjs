@@ -37,7 +37,13 @@ export default function EditServicePage() {
     const params = useParams();
     const [loading, setLoading] = useState(false);
     const [fetching, setFetching] = useState(true);
-    const [formData, setFormData] = useState({
+    const [formData, setFormData] = useState<{
+        name: string;
+        description: string;
+        image: string;
+        homeIcon: string;
+        order: number | string;
+    }>({
         name: '',
         description: '',
         image: '',
@@ -240,8 +246,14 @@ export default function EditServicePage() {
                             </label>
                             <input
                                 type="number"
-                                value={formData.order}
-                                onChange={(e) => setFormData({ ...formData, order: parseInt(e.target.value) })}
+                                value={formData.order || ''}
+                                onChange={(e) => setFormData({ ...formData, order: e.target.value === '' ? '' : Number(e.target.value) })}
+                                onBlur={(e) => {
+                                    const num = Number(e.target.value);
+                                    if (!e.target.value || isNaN(num) || num < 1) {
+                                        setFormData({ ...formData, order: 1 });
+                                    }
+                                }}
                                 min="1"
                                 className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
                             />

@@ -1,9 +1,9 @@
 'use client';
 
-import { useState, useRef } from 'react';
-import { Upload, X } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { X, AlertCircle } from 'lucide-react';
 import Image from 'next/image';
-import { useUploadThing } from '@/lib/uploadthing';
+import { UploadButton } from '@/lib/uploadthing';
 
 interface ImageUploaderProps {
     value?: string;
@@ -12,47 +12,18 @@ interface ImageUploaderProps {
 }
 
 export default function ImageUploader({ value, onChange, label }: ImageUploaderProps) {
-    const [uploading, setUploading] = useState(false);
     const [preview, setPreview] = useState(value || '');
-    const fileInputRef = useRef<HTMLInputElement>(null);
+    const [error, setError] = useState<string | null>(null);
 
-    const { startUpload } = useUploadThing("imageUploader", {
-        onClientUploadComplete: (res) => {
-            if (res && res[0]) {
-                onChange(res[0].ufsUrl);
-                setUploading(false);
-            }
-        },
-        onUploadError: (error) => {
-            console.error('Error uploading file:', error);
-            alert('Failed to upload image: ' + error.message);
-            setPreview(value || '');
-            setUploading(false);
-        },
-    });
-
-    const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-        const file = e.target.files?.[0];
-        if (!file) return;
-
-        // Show preview
-        const reader = new FileReader();
-        reader.onloadend = () => {
-            setPreview(reader.result as string);
-        };
-        reader.readAsDataURL(file);
-
-        // Upload file using UploadThing
-        setUploading(true);
-        await startUpload([file]);
-    };
+    // Keep preview in sync with value prop
+    useEffect(() => {
+        setPreview(value || '');
+    }, [value]);
 
     const handleRemove = () => {
         setPreview('');
+        setError(null);
         onChange('');
-        if (fileInputRef.current) {
-            fileInputRef.current.value = '';
-        }
     };
 
     return (
@@ -71,29 +42,56 @@ export default function ImageUploader({ value, onChange, label }: ImageUploaderP
                             <X size={16} />
                         </button>
                     </div>
+                ) : error ? (
+                    <div className="flex flex-col items-start gap-2">
+                        <div className="w-32 h-32 border-2 border-dashed border-red-300 rounded-lg flex flex-col items-center justify-center gap-2 bg-red-50">
+                            <AlertCircle className="text-red-400" size={24} />
+                            <span className="text-xs text-red-500 text-center px-2">Error</span>
+                        </div>
+                        <p className="text-sm text-red-600 max-w-xs">{error}</p>
+                        <button
+                            type="button"
+                            onClick={() => setError(null)}
+                            className="text-sm text-indigo-600 hover:text-indigo-700 font-medium"
+                        >
+                            Try Again
+                        </button>
+                    </div>
                 ) : (
-                    <button
-                        type="button"
-                        onClick={() => fileInputRef.current?.click()}
-                        className="w-32 h-32 border-2 border-dashed border-gray-300 rounded-lg flex flex-col items-center justify-center gap-2 hover:border-indigo-500 hover:bg-indigo-50 transition-all"
-                    >
-                        <Upload className="text-gray-400" size={24} />
-                        <span className="text-sm text-gray-500">Upload</span>
-                    </button>
-                )}
-
-                <input
-                    ref={fileInputRef}
-                    type="file"
-                    accept="image/*"
-                    onChange={handleFileChange}
-                    className="hidden"
-                />
-
-                {uploading && (
-                    <div className="flex items-center gap-2 text-indigo-600">
-                        <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-indigo-600"></div>
-                        <span className="text-sm">Uploading...</span>
+                    <div className="flex flex-col gap-2">
+                        <UploadButton
+                            endpoint="imageUploader"
+                            onClientUploadComplete={(res) => {
+                                console.log("Upload complete:", res);
+                                if (res && res[0]) {
+                                    const url = res[0].ufsUrl || res[0].url;
+                                    onChange(url);
+                                    setPreview(url);
+                                    setError(null);
+                                }
+                            }}
+                            onUploadError={(err: Error) => {
+                                console.error("Upload error:", err);
+                                let message = err.message;
+                                if (message.includes('FileSizeMismatch') || message.includes('too large')) {
+                                    message = 'File is too large. Maximum size is 8MB.';
+                                } else if (message.includes('Unauthorized')) {
+                                    message = 'Please log in to upload images.';
+                                }
+                                setError(message);
+                            }}
+                            appearance={{
+                                button: "w-32 h-32 border-2 border-dashed border-gray-300 rounded-lg flex flex-col items-center justify-center gap-2 hover:border-indigo-500 hover:bg-indigo-50 transition-all bg-white text-gray-500 text-sm ut-uploading:bg-indigo-50 ut-uploading:border-indigo-300",
+                                allowedContent: "hidden",
+                            }}
+                            content={{
+                                button({ ready, isUploading }) {
+                                    if (isUploading) return "Uploading...";
+                                    if (ready) return "Upload Image";
+                                    return "Loading...";
+                                },
+                            }}
+                        />
                     </div>
                 )}
             </div>

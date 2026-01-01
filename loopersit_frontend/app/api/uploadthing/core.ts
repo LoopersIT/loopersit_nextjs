@@ -9,26 +9,35 @@ export const ourFileRouter = {
     // General image uploader for admin panel (services, members, portfolio, etc.)
     imageUploader: f({
         image: {
-            maxFileSize: "4MB",
+            maxFileSize: "8MB",
             maxFileCount: 1,
         },
     })
         .middleware(async ({ req }) => {
             // This code runs on your server before upload
-            const session = await getServerSession();
+            console.log("UploadThing middleware called");
 
-            // If you throw, the user will not be able to upload
-            if (!session) {
-                throw new UploadThingError("Unauthorized");
+            try {
+                const session = await getServerSession();
+                console.log("Session check:", session ? "authenticated" : "no session");
+
+                // If you throw, the user will not be able to upload
+                if (!session) {
+                    console.log("Upload rejected: No session");
+                    throw new UploadThingError("Unauthorized - Please log in first");
+                }
+
+                // Whatever is returned here is accessible in onUploadComplete as `metadata`
+                return { userId: session.user?.email || "admin" };
+            } catch (error) {
+                console.error("UploadThing middleware error:", error);
+                throw error;
             }
-
-            // Whatever is returned here is accessible in onUploadComplete as `metadata`
-            return { userId: session.user?.email || "admin" };
         })
         .onUploadComplete(async ({ metadata, file }) => {
             // This code RUNS ON YOUR SERVER after upload
             console.log("Upload complete for userId:", metadata.userId);
-            console.log("file url", file.ufsUrl);
+            console.log("File URL:", file.ufsUrl);
 
             // Return the file URL to the client
             return { url: file.ufsUrl };

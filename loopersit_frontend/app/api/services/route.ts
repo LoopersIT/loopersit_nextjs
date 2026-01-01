@@ -40,7 +40,18 @@ export async function POST(request: NextRequest) {
             return NextResponse.json({ error: 'Name and description are required' }, { status: 400 });
         }
 
-        const slug = slugify(name, { lower: true, strict: true });
+        // Generate base slug
+        let slug = slugify(name, { lower: true, strict: true });
+
+        // Check if slug already exists and make it unique if needed
+        const existingService = await prisma.service.findUnique({
+            where: { slug },
+        });
+
+        if (existingService) {
+            // Add a timestamp to make the slug unique
+            slug = `${slug}-${Date.now()}`;
+        }
 
         const service = await prisma.service.create({
             data: {
@@ -54,8 +65,19 @@ export async function POST(request: NextRequest) {
         });
 
         return NextResponse.json(service, { status: 201 });
-    } catch (error) {
+    } catch (error: any) {
         console.error('Error creating service:', error);
-        return NextResponse.json({ error: 'Failed to create service' }, { status: 500 });
+
+        // Check for Prisma unique constraint error
+        if (error.code === 'P2002') {
+            return NextResponse.json({ error: 'A service with this name already exists' }, { status: 409 });
+        }
+
+        // Check for database connection errors
+        if (error.code === 'P1001' || error.code === 'P1002') {
+            return NextResponse.json({ error: 'Database connection failed' }, { status: 503 });
+        }
+
+        return NextResponse.json({ error: 'Failed to create service: ' + (error.message || 'Unknown error') }, { status: 500 });
     }
 }

@@ -18,7 +18,7 @@ export default function PortfolioPage() {
     const [portfolios, setPortfolios] = useState<Portfolio[]>([]);
     const [loading, setLoading] = useState(true);
     const [editingId, setEditingId] = useState<number | null>(null);
-    const [formData, setFormData] = useState({ title: '', image: '', duration: '', detail: '', link: '', order: 1 });
+    const [formData, setFormData] = useState<{ title: string; image: string; duration: string; detail: string; link: string; order: number | string }>({ title: '', image: '', duration: '', detail: '', link: '', order: 1 });
 
     useEffect(() => {
         fetchPortfolios();
@@ -146,8 +146,14 @@ export default function PortfolioPage() {
                         <label className="block text-sm font-medium text-gray-700 mb-2">Order</label>
                         <input
                             type="number"
-                            value={formData.order}
-                            onChange={(e) => setFormData({ ...formData, order: parseInt(e.target.value) })}
+                            value={formData.order || ''}
+                            onChange={(e) => setFormData({ ...formData, order: e.target.value === '' ? '' : Number(e.target.value) })}
+                            onBlur={(e) => {
+                                const num = Number(e.target.value);
+                                if (!e.target.value || isNaN(num) || num < 1) {
+                                    setFormData({ ...formData, order: 1 });
+                                }
+                            }}
                             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500"
                             min="1"
                         />
