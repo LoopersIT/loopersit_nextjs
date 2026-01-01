@@ -81,7 +81,7 @@ export default function ImageUploader({ value, onChange, label }: ImageUploaderP
                                 setError(message);
                             }}
                             appearance={{
-                                button: "w-32 h-32 border-2 border-dashed border-gray-300 rounded-lg flex flex-col items-center justify-center gap-2 hover:border-indigo-500 hover:bg-indigo-50 transition-all bg-white text-gray-500 text-sm ut-uploading:bg-indigo-50 ut-uploading:border-indigo-300",
+                                button: "w-32 h-32 border-2 border-dashed border-gray-300 rounded-lg flex flex-col items-center justify-center gap-2 hover:border-indigo-500 hover:bg-indigo-50 transition-all bg-white text-gray-500 text-sm ut-uploading:bg-indigo-50 ut-uploading:border-indigo-300 ut-uploading:text-indigo-600",
                                 allowedContent: "hidden",
                             }}
                             content={{

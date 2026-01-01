@@ -23,6 +23,7 @@ interface Service {
     slug: string;
     description: string;
     image: string | null;
+    homeIcon: string | null;
     offers: ServiceOffer[];
     subservices: SubService[];
 }
@@ -126,9 +127,18 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
                                     alignItems: 'center',
                                     justifyContent: 'center',
                                     color: 'var(--white)',
-                                    fontSize: '1.5rem'
+                                    fontSize: '1.5rem',
+                                    overflow: 'hidden'
                                 }}>
-                                    <FaCode />
+                                    {service.homeIcon ? (
+                                        <img
+                                            src={service.homeIcon}
+                                            alt={service.name}
+                                            style={{ width: '100%', height: '100%', objectFit: 'contain', padding: '8px' }}
+                                        />
+                                    ) : (
+                                        <FaCode />
+                                    )}
                                 </div>
                                 <div>
                                     <h2 style={{ fontSize: '1.5rem', color: 'var(--primary)', marginBottom: '0.25rem' }}>
