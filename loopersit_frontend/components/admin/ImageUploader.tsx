@@ -3,6 +3,7 @@
 import { useState, useRef } from 'react';
 import { Upload, X } from 'lucide-react';
 import Image from 'next/image';
+import { useUploadThing } from '@/lib/uploadthing';
 
 interface ImageUploaderProps {
     value?: string;
@@ -15,6 +16,21 @@ export default function ImageUploader({ value, onChange, label }: ImageUploaderP
     const [preview, setPreview] = useState(value || '');
     const fileInputRef = useRef<HTMLInputElement>(null);
 
+    const { startUpload } = useUploadThing("imageUploader", {
+        onClientUploadComplete: (res) => {
+            if (res && res[0]) {
+                onChange(res[0].ufsUrl);
+                setUploading(false);
+            }
+        },
+        onUploadError: (error) => {
+            console.error('Error uploading file:', error);
+            alert('Failed to upload image: ' + error.message);
+            setPreview(value || '');
+            setUploading(false);
+        },
+    });
+
     const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
         if (!file) return;
@@ -26,28 +42,9 @@ export default function ImageUploader({ value, onChange, label }: ImageUploaderP
         };
         reader.readAsDataURL(file);
 
-        // Upload file
+        // Upload file using UploadThing
         setUploading(true);
-        try {
-            const formData = new FormData();
-            formData.append('file', file);
-
-            const response = await fetch('/api/upload', {
-                method: 'POST',
-                body: formData,
-            });
-
-            if (!response.ok) throw new Error('Upload failed');
-
-            const data = await response.json();
-            onChange(data.url);
-        } catch (error) {
-            console.error('Error uploading file:', error);
-            alert('Failed to upload image');
-            setPreview(value || '');
-        } finally {
-            setUploading(false);
-        }
+        await startUpload([file]);
     };
 
     const handleRemove = () => {

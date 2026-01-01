@@ -20,6 +20,9 @@ ADMIN_PASSWORD="admin123"
 
 # Uploads
 NEXT_PUBLIC_UPLOAD_DIR="/uploads"
+
+# UploadThing Configuration (for Cloudflare deployment)
+UPLOADTHING_TOKEN="your-uploadthing-token-from-dashboard"
 ```
 
 ## Step 2: Generate Secure Secret
