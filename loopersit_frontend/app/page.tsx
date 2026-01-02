@@ -132,7 +132,7 @@ export default async function HomePage() {
                                                 <img
                                                     src={service.homeIcon}
                                                     alt={service.name}
-                                                    style={{ width: '100%', height: '100%', objectFit: 'contain' }}
+                                                    style={{ width: '50%', height: '50%', objectFit: 'contain' }}
                                                 />
                                             ) : (
                                                 <FallbackIcon />
