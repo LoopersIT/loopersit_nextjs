@@ -111,7 +111,7 @@
     position: relative;
     z-index: 1;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
     gap: 1.5rem;
     justify-items: center;
 }
@@ -125,7 +125,7 @@
     border-radius: var(--radius-lg);
     overflow: hidden;
     width: 100%;
-    max-width: 320px;
+    max-width: min(320px, calc(100vw - 4rem));
     text-align: center;
     box-shadow:
         0 8px 32px rgba(0, 0, 0, 0.1),
@@ -231,8 +231,9 @@
 
 .team-members-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr;
     gap: 1.5rem;
+    justify-items: center;
 }
 
 /* Member Card */
@@ -243,6 +244,8 @@
     box-shadow: var(--shadow);
     transition: var(--transition);
     text-align: center;
+    width: 100%;
+    max-width: 320px;
 }
 
 .team-member-card:hover {
@@ -324,19 +327,29 @@
     transform: translateY(-2px);
 }
 
+@media (max-width: 480px) {
+    .team-lead-section {
+        padding: 2rem 1rem;
+    }
+
+    .team-lead-card {
+        max-width: 100%;
+    }
+}
+
 @media (min-width: 768px) {
     .about-features {
         grid-template-columns: repeat(2, 1fr);
     }
 
     .team-members-grid {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(2, 1fr);
     }
 }
 
 @media (min-width: 1024px) {
     .team-members-grid {
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: repeat(3, 1fr);
     }
 
     .team-member-image-wrapper {
