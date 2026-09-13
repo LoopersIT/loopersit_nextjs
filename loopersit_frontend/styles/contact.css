@@ -3,12 +3,14 @@
     display: grid;
     grid-template-columns: 1fr;
     gap: 2rem;
+    overflow-x: hidden; /* guard against child overflow on mobile */
+    min-width: 0;
 }
 
 .contact-info {
     background: linear-gradient(135deg, var(--primary), var(--primary-light));
     border-radius: var(--radius-lg);
-    padding: 2.5rem;
+    padding: 1.5rem;        /* tighter on mobile */
     color: var(--white);
 }
 
@@ -87,8 +89,9 @@
 .contact-form {
     background: var(--white);
     border-radius: var(--radius-lg);
-    padding: 2.5rem;
+    padding: 1.5rem;        /* tighter on mobile */
     box-shadow: var(--shadow);
+    overflow: hidden;       /* prevent Turnstile iframe from overflowing */
 }
 
 .contact-form h2 {
@@ -170,4 +173,15 @@
     .form-row {
         grid-template-columns: 1fr 1fr;
     }
+
+    .contact-form,
+    .contact-info {
+        padding: 2.5rem;    /* restore full padding on tablet/desktop */
+    }
+}
+
+/* Turnstile widget: prevent iframe overflow on narrow screens */
+.cf-turnstile,
+.cf-turnstile iframe {
+    max-width: 100%;
 }
