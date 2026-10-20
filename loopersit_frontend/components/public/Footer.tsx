@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { FaFacebookF, FaLinkedinIn, FaYoutube } from 'react-icons/fa';
 import { FaXTwitter } from 'react-icons/fa6';
-import { HiOutlineLocationMarker, HiOutlineMail } from 'react-icons/hi';
+import { HiOutlineLocationMarker, HiOutlineMail, HiOutlinePhone } from 'react-icons/hi';
 import '@/styles/footer.css';
 
 interface Page {
@@ -98,6 +98,10 @@ export default async function Footer() {
                         <div className="footer-contact-item">
                             <HiOutlineLocationMarker className="footer-contact-icon" />
                             <span>Mirpur, Dhaka-1100<br />Bangladesh</span>
+                        </div>
+                        <div className="footer-contact-item">
+                            <HiOutlinePhone className="footer-contact-icon" />
+                            <a href="tel:+8801815550099">+880 1815-550099</a>
                         </div>
                         <div className="footer-contact-item">
                             <HiOutlineMail className="footer-contact-icon" />

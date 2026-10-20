@@ -1,7 +1,7 @@
 'use client';
 
 import { useRef, useState } from 'react';
-import { FaMapMarkerAlt, FaEnvelope, FaClock, FaFacebookF, FaLinkedinIn, FaCheckCircle, FaPaperPlane } from 'react-icons/fa';
+import { FaMapMarkerAlt, FaPhoneAlt, FaEnvelope, FaClock, FaFacebookF, FaLinkedinIn, FaCheckCircle, FaPaperPlane } from 'react-icons/fa';
 import { FaXTwitter } from 'react-icons/fa6';
 import { Turnstile, type TurnstileInstance } from '@marsidev/react-turnstile';
 import '@/styles/services.css';
@@ -88,6 +88,16 @@ export default function ContactPage() {
                             <div className="contact-item-content">
                                 <h4>Address</h4>
                                 <p>Mirpur, Dhaka-1100<br />Bangladesh</p>
+                            </div>
+                        </div>
+
+                        <div className="contact-item">
+                            <div className="contact-item-icon">
+                                <FaPhoneAlt />
+                            </div>
+                            <div className="contact-item-content">
+                                <h4>Phone</h4>
+                                <a href="tel:+8801815550099">+880 1815-550099</a>
                             </div>
                         </div>
 
